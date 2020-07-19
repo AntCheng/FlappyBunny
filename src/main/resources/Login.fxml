@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="loginScene" blendMode="DARKEN" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.Controller">
+    <children>
+        <Button layoutX="189.0" layoutY="278.0" mnemonicParsing="false" onAction="#login" text="Login" />
+        <PasswordField fx:id="password" layoutX="189.0" layoutY="200.0" promptText="Password" />
+        <TextField fx:id="userName" layoutX="189.0" layoutY="143.0" promptText="Username" />
+        <Label fx:id="status" layoutX="189.0" layoutY="342.0" text="username or password incorrect" textFill="#e40f0f" visible="false" />
+      <Label fx:id="title" accessibleRole="BUTTON" alignment="TOP_LEFT" cache="true" cacheHint="SCALE" ellipsisString="" layoutX="15.0" layoutY="14.0" lineSpacing="300.0" mouseTransparent="true" prefHeight="80.0" prefWidth="564.0" text="Shooting Expert" textFill="#d71b1b" textOverrun="LEADING_ELLIPSIS" wrapText="true">
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+         <font>
+            <Font name="Myanmar MN" size="58.0" />
+         </font>
+         <opaqueInsets>
+            <Insets right="100.0" top="100.0" />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></Label>
+      <ImageView fitHeight="104.0" fitWidth="123.0" layoutX="366.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@pngegg.png" />
+         </image>
+         <effect>
+            <Lighting bumpInput="$null" diffuseConstant="1.47" specularConstant="2.0" specularExponent="19.52" surfaceScale="2.33">
+               <light>
+                  <Light.Distant>
+                     <color>
+                        <Color red="0.3684210479259491" green="0.04605263099074364" blue="0.04605263099074364" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="90.0" fitWidth="121.0" layoutX="463.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@pngegg.png" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="-0.1" contrast="0.56" hue="-0.19" saturation="0.02" />
+         </effect>
+      </ImageView>
+    </children>
+    <cursor>
+        <Cursor fx:constant="DEFAULT" />
+    </cursor>
+   <effect>
+      <Blend mode="DARKEN" />
+   </effect>
+</AnchorPane>
