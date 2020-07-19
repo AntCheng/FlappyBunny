@@ -1,6 +1,6 @@
-# My Personal Project
+# Shootingexpert
 
-## A subtitle
+## The application to booster your shooting skills like a pro
 
 A *bulleted* list:
 - item 1
