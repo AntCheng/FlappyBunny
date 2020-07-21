@@ -39,6 +39,7 @@ public class FlappyBird {
         gc = canvas.getGraphicsContext2D();
     }
 
+    // effect: run the program, set up a timer, update and draw the graphic model in the canvas
     public void run() {
         //set a timer
         lastNanoTime = (new Long(System.nanoTime()));
