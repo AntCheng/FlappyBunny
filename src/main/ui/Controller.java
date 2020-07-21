@@ -17,6 +17,7 @@ public class Controller {
 
 
     Practise practise;
+    FlappyBird flappyBird;
     Stage theStage;
 
     @FXML
@@ -50,8 +51,8 @@ public class Controller {
             //((Node)event.getSource()).getScene().getWindow().hide();
             status.getScene().getWindow().hide();
             Parent root = FXMLLoader.load(getClass().getResource("../resources/Main.fxml"));
-            Scene scene = new Scene(root);
-            theStage.setScene(scene);
+            Scene mainScene = new Scene(root);
+            theStage.setScene(mainScene);
             theStage.show();
         } else {
             status.setVisible(true);
@@ -59,13 +60,22 @@ public class Controller {
     }
 
     //effect: start the game, go to the game window, in the game mode practise.
-    public void getPractiseScene() {
+    public void gotoPractiseScene() {
         practise = new Practise();
         Scene practiseScene = practise.getScene();
         Stage practiseStage = new Stage();
-        practiseStage.initModality(Modality.WINDOW_MODAL);
+        //practiseStage.initModality(Modality.WINDOW_MODAL);
         practiseStage.setScene(practiseScene);
         practiseStage.show();
+        mainScene.getScene().getWindow().hide();
+    }
+
+    public void gotoFlappyBirdScene() {
+        flappyBird = new FlappyBird();
+        Scene flappyBirdScene = flappyBird.getScene();
+        theStage.setScene(flappyBirdScene);
+        theStage.show();
+        theStage.setResizable(false);
         mainScene.getScene().getWindow().hide();
     }
 
