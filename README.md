@@ -13,5 +13,5 @@ the bold and italic fonts correctly but they will appear correctly on GitHub.
 
 ### User Stories:
 - As a user, I want to be able to have a nice-looking login scene to login to this game
-- As a user, I want to be able to add more birds image to play this game
-- As a user, I want to be able to 
+- As a user, I want to be able to add more bunny image to my bunny to play this game
+- As a user, I want to be able to view my bunny hp during the game.

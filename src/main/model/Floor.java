@@ -22,13 +22,13 @@ public class Floor implements GraphicModel {
     private double gravityOnFloor;
 
 
-    public Floor(int x, int y, int type) {
+    public Floor(int x, int y, Bunny bunny, int type) {
         Random rand = new Random();
         this.positionX = x;
-        this.positionY = rand.nextInt(y - 1);
+        this.positionY = bunny.getPositionY() + (-1 + rand.nextInt(3)) * 100;
         this.velocityX = 100;
         this.height = 50;
-        this.width = 50 + rand.nextInt(500);
+        this.width = 500 + rand.nextInt(300);
         normalFloor = new Image("ground_wood.png",this.width,
                 this.height,false,false);
     }
@@ -46,6 +46,18 @@ public class Floor implements GraphicModel {
         return normalFloor;
     }
 
+    public double getWidth() {
+        return width;
+    }
+
+    public void setPositionY(double positionY) {
+        this.positionY = positionY;
+    }
+
+    public void setPositionX(double positionX) {
+        this.positionX = positionX;
+    }
+
     public boolean isOut() {
         if (positionX + width < 0) {
             return true;
@@ -56,6 +68,7 @@ public class Floor implements GraphicModel {
     @Override
     public void update(double time) {
         this.positionX -= velocityX * time;
+        velocityX++;
     }
 
     @Override

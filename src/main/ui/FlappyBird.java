@@ -5,7 +5,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import model.Bird;
+import model.Bunny;
+import model.Cactus;
 import model.Floor;
 import model.GameModelController;
 
@@ -32,7 +33,6 @@ public class FlappyBird {
     public void initial() {
         Group root = new Group();
         falppyBirdScene = new Scene(root);
-        //theStage.setScene( practiseScene );
         canvas = new Canvas(WIDTH, HEIGHT);
         root.getChildren().add(canvas);
         gmc = new GameModelController(WIDTH,HEIGHT);
@@ -72,17 +72,24 @@ public class FlappyBird {
 
     public void draw(Double time) {
         gc.clearRect(0,0,WIDTH,HEIGHT); //clear canvas
-        drawBird(gmc.getBird(),time);
+        drawBird(gmc.getBunny(),time);
         drawFloor(gmc.getFloorList());
+        drawCactus(gmc.getCactusList());
     }
 
-    public void drawBird(Bird bird, Double time) {
-        gc.drawImage(bird.getWalkImage(time), bird.getPositionX(), bird.getPositionY());
+    public void drawBird(Bunny bunny, Double time) {
+        gc.drawImage(bunny.getWalkImage(time), bunny.getPositionX(), bunny.getPositionY());
     }
 
     public void drawFloor(List<Floor> floorList) {
         for (Floor floor : floorList) {
             gc.drawImage(floor.getImage(), floor.getPositionX(), floor.getPositionY());
+        }
+    }
+
+    public void drawCactus(List<Cactus> cactusList) {
+        for (Cactus cactus : cactusList) {
+            gc.drawImage(cactus.getImage(), cactus.getPositionX(), cactus.getPositionY());
         }
     }
 
