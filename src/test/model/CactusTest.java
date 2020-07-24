@@ -40,6 +40,12 @@ class CactusTest {
     }
 
     @Test
+    void getCactusImage(){
+        assertEquals(cactus1.getImage().getWidth(),cactus2.getImage().getWidth());
+        assertEquals(cactus2.getImage().getHeight(),cactus2.getImage().getHeight());
+    }
+
+    @Test
     void setIsTouchedTest() {
         cactus2.setPositionY(750);
         cactus2.setPositionX(50);

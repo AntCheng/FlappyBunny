@@ -22,7 +22,8 @@ public class Cactus implements GraphicModel {
         Random rand = new Random();
         this.width = 60;
         this.height = 60;
-        this.cactusImage = new Image("cactus.png", 60, 60, false,false);
+        this.cactusImage = new Image("cactus.png", 60,
+                60, false,false);
         this.positionX = floor.getPositionX() + rand.nextInt((int) (floor.getWidth() - 1));
         this.positionY = floor.getPositionY() - 50;
         this.velocityX = 100;

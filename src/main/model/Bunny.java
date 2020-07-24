@@ -27,8 +27,10 @@ public class Bunny implements GraphicModel {
 
     //effect: instantiate a bunny object
     public Bunny(int x, int y) {
-        walk1 = new Image("/Players/bunny1_walk1.png",50,50,false,false);
-        walk2 = new Image("/Players/bunny1_walk2.png",50,50,false,false);
+        walk1 = new Image("/Players/bunny1_walk1.png",50,50,
+                false,false);
+        walk2 = new Image("/Players/bunny1_walk2.png",50,50,
+                false,false);
         this.walkStateTime = 0;
         this.positionX = x;
         this.positionY = y;
@@ -37,14 +39,6 @@ public class Bunny implements GraphicModel {
         hp = 3;
     }
 
-//    public Bunny(int x, int y, String fortestonly) {
-//        this.walkStateTime = 0;
-//        this.positionX = x;
-//        this.positionY = y;
-//        this.velocityY = 100;
-//        this.gravityOnBunny = 1000;
-//        hp = 3;
-//    }
 
     public void setOnFloor(boolean b) {
         this.onFloor = b;
@@ -62,9 +56,9 @@ public class Bunny implements GraphicModel {
         return gravityOnBunny;
     }
 
-    public double getWalkStateTime() {
-        return walkStateTime;
-    }
+//    public double getWalkStateTime() {
+//        return walkStateTime;
+//    }
 
     public boolean getWalkState() {
         return walkState;
@@ -90,13 +84,13 @@ public class Bunny implements GraphicModel {
         this.positionY = positionY;
     }
 
-    public double getVelocityX() {
-        return velocityX;
-    }
+//    public double getVelocityX() {
+//        return velocityX;
+//    }
 
-    public void setVelocityX(double velocityX) {
-        this.velocityX = velocityX;
-    }
+//    public void setVelocityX(double velocityX) {
+//        this.velocityX = velocityX;
+//    }
 
     public double getVelocityY() {
         return velocityY;
@@ -110,17 +104,17 @@ public class Bunny implements GraphicModel {
         return width;
     }
 
-    public void setWidth(double width) {
-        this.width = width;
-    }
+//    public void setWidth(double width) {
+//        this.width = width;
+//    }
 
     public double getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
-        this.height = height;
-    }
+//    public void setHeight(double height) {
+//        this.height = height;
+//    }
 
     public void setHp(int hp) {
         this.hp = hp;

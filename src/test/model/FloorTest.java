@@ -31,6 +31,11 @@ class FloorTest {
     }
 
     @Test
+    void getFloorImage(){
+        assertEquals(floor1.getImage().getHeight(),floor2.getImage().getHeight());
+    }
+
+    @Test
     void isOut() {
         floor1.setPositionX(-501);
         floor2.setPositionX(-50);

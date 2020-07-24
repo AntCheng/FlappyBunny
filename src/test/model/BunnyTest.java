@@ -115,6 +115,14 @@ class BunnyTest {
         assertEquals(730,bunny.getPositionY());
         assertEquals(0,bunny.getVelocityY());
         assertEquals(0,bunny.getGravityOnBunny());
+
+        //intersect but not on the floor
+        floor1.setPositionY(740);
+        floor1.setPositionX(100);
+        bunny.setPositionX(100);
+        bunny.setOnFloor(false);
+        bunny.checkStandFloor(floorList);
+        assertEquals(false,bunny.getOnFloor());
     }
 
     @Test
@@ -168,6 +176,10 @@ class BunnyTest {
         assertEquals(1,bunny.getHp());
         assertEquals(true,cactus1.getIsTounched());
         assertEquals(true,cactus1.getIsTounched());
+
+        //
+        bunny.checkTouchCactus(cactusList);
+        assertEquals(1,bunny.getHp());
     }
 
     @Test

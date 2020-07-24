@@ -5,6 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import model.Bunny;
 import model.Cactus;
 import model.Floor;
@@ -26,6 +27,14 @@ public class FlappyBird {
     GraphicsContext gc;
     Boolean isGameOver;
     Controller controller;
+//    Image bunnyWalk1 = new Image("/Players/bunny1_walk1.png",50,50,
+//            false,false);
+//    Image bunnyWalk2 = new Image("/Players/bunny1_walk2.png",50,50,
+//            false,false);
+//    Image cactusImage = new Image("cactus.png", 60, 60,
+//            false,false);
+
+
 
     public FlappyBird(Controller controller) {
         this.controller = controller;

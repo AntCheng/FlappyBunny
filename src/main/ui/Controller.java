@@ -31,7 +31,6 @@ public class Controller {
     private List<Player> players;
 
 
-    Practise practise;
     FlappyBird flappyBird;
     Stage theStage;
     private Scanner input;
@@ -191,15 +190,15 @@ public class Controller {
     }
 
     //effect: start the game, go to the game window, in the game mode practise.
-    public void gotoPractiseScene() {
-        practise = new Practise();
-        Scene practiseScene = practise.getScene();
-        Stage practiseStage = new Stage();
-        //practiseStage.initModality(Modality.WINDOW_MODAL);
-        practiseStage.setScene(practiseScene);
-        practiseStage.show();
-        mainScene.getScene().getWindow().hide();
-    }
+//    public void gotoPractiseScene() {
+//        practise = new Practise();
+//        Scene practiseScene = practise.getScene();
+//        Stage practiseStage = new Stage();
+//        //practiseStage.initModality(Modality.WINDOW_MODAL);
+//        practiseStage.setScene(practiseScene);
+//        practiseStage.show();
+//        mainScene.getScene().getWindow().hide();
+//    }
 
     public void gotoFlappyBirdScene() {
         flappyBird = new FlappyBird(this);

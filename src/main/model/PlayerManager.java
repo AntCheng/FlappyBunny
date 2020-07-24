@@ -54,7 +54,8 @@ public class PlayerManager {
 
     //MODIFIES: this
     //EFFECTS: save the player accounts information to the file
-    public void saveRecord(Double record, String accountsFile) throws FileNotFoundException, UnsupportedEncodingException {
+    public void saveRecord(Double record, String accountsFile)
+            throws FileNotFoundException, UnsupportedEncodingException {
         currentPlayer.setRecord(record);
         Writer writer = new Writer(new File(accountsFile));
         for (Player player : players) {
