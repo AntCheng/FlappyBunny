@@ -49,6 +49,7 @@ public class Controller {
     private AnchorPane mainScene;
 
 
+
     public Controller() {
         theStage = new Stage();
         loadAccounts();
@@ -56,6 +57,8 @@ public class Controller {
         input = new Scanner(System.in);
     }
 
+    //MODIFIES: this
+    //EFFECTS: Asking the user to login or register, will run again if the use does not choose
     public void loginOrRigister() {
         //while (isrun)
         System.out.println("Do you want to Login or Register, type login or register");
@@ -65,10 +68,14 @@ public class Controller {
         } else if (lore.equals("register")) {
             register();
         } else {
+            System.out.println("please try again");
             loginOrRigister();
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: register the user, set the user as current player.will run again if the use does not choose
+    // the register username must not be already in the file
     public void register() {
         String usernameInput;
         String passwordInput;
@@ -85,11 +92,13 @@ public class Controller {
             System.out.println();
             settingForGame();
         } else {
+            System.out.println("Please try again");
             register();
         }
     }
 
-
+    //MODIFIES: this
+    //EFFECTS: ask to login, user has to provide username and password that match in the file
     public void login() {
         String usernameInput;
         String passwordInput;
@@ -110,6 +119,8 @@ public class Controller {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: setting up the game, ready to start the game
     public void settingForGame() {
         boolean ischoose = true;
         System.out.println("Hi there!");
@@ -134,6 +145,8 @@ public class Controller {
         }
     }
 
+    //MODIFIES:this
+    //EFFECT: save the current information for the reader, write into the file ACCOUNTS_FILE
     public void saveGame() {
         if (flappyBird.getIsGameOver()) {
             Double currentRecord = flappyBird.getTime();
@@ -172,6 +185,7 @@ public class Controller {
 
     // ------------------------------------------------ GUI -------------------------------------------------------
     // ------------------------------------------------ GUI -------------------------------------------------------
+    // NOTE: not use in phase one except the game scene: gotoFlapplyBirdScene
 
     public void startLoginScene() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("../resources/Login.fxml"));

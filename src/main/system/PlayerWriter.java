@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
+//ATTRIBUTES: the model of this class comes form the Writer class in TellerAPP
+// TellerAPP source: https://github.students.cs.ubc.ca/CPSC210/TellerApp
 public class PlayerWriter {
     private PrintWriter printWriter;
 

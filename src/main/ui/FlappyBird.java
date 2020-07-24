@@ -64,6 +64,7 @@ public class FlappyBird {
                 double elapsedTime = (currentNanoTime - lastNanoTime.longValue()) / 1000000000.0;
                 lastNanoTime = currentNanoTime;
                 recordTime += elapsedTime;
+
                 //update the position (give the elapsed time)
                 gmc.update(elapsedTime);
 
@@ -71,11 +72,12 @@ public class FlappyBird {
                 falppyBirdScene.setOnKeyPressed(e -> gmc.translateKeyEventPressed(e.getCode().toString()));
                 falppyBirdScene.setOnKeyReleased(e -> gmc.translateKeyEventReleased(e.getCode().toString()));
 
-                //check on collison and game state
+                //check on collison and if the game ends
                 gmc.check();
                 if (gmc.isGameOver) {
                     timer.stop();
                     isGameOver = true;
+                    drawGameOver();
                     controller.saveGame();
                 }
 
@@ -110,11 +112,17 @@ public class FlappyBird {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: drawHP and the current meters of the game controller canvas
     public void drawMetersAndHP() {
         String time = recordTime.toString();
         gc.fillText(time + " meters",950,50);
         gc.fillText("HP " + String.valueOf(gmc.getBunny().getHp()), 10,50);
 
+    }
+
+    public void drawGameOver() {
+        gc.fillText("GAME OVER",500,400);
     }
 
     public Double getTime() {
