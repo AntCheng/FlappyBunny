@@ -2,10 +2,9 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import system.Reader;
+import system.PlayerReader;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlayerManagerTest {
 
     PlayerManager playerManager;
-    Reader reader;
+    PlayerReader playerReader;
     List<Player> players;
     List<Player> playersAfterSave;
     File file;
@@ -37,7 +36,7 @@ class PlayerManagerTest {
         printWriter.close();
 
         try {
-            players = reader.readAccounts(file);
+            players = playerReader.readAccounts(file);
         } catch (IOException e) {
             fail();
         }
@@ -76,7 +75,7 @@ class PlayerManagerTest {
         }
 
         try {
-            playersAfterSave = reader.readAccounts(new File("./data/testPlayers"));
+            playersAfterSave = playerReader.readAccounts(new File("./data/testPlayers"));
         } catch (IOException e) {
             fail();
         }

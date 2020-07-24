@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Player;
 import model.PlayerManager;
-import system.Reader;
+import system.PlayerReader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,6 +27,7 @@ public class Controller {
     String usernameC = "username";
     String passwordC = "pass";
     String bunnyState;
+    boolean isrun;
     private PlayerManager playerManager;
     private List<Player> players;
 
@@ -56,6 +57,7 @@ public class Controller {
     }
 
     public void loginOrRigister() {
+        //while (isrun)
         System.out.println("Do you want to Login or Register, type login or register");
         String lore = input.next();
         if (lore.equals("login")) {
@@ -103,6 +105,7 @@ public class Controller {
             System.out.println();
             settingForGame();
         } else {
+            System.out.println("incorrect username and password, please try again");
             login();
         }
     }
@@ -141,6 +144,8 @@ public class Controller {
             if (saveornot.equals("yes")) {
                 try {
                     playerManager.saveRecord(currentRecord, ACCOUNTS_FILE);
+                    System.out.println("see you next time");
+                    theStage.close();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (UnsupportedEncodingException e) {
@@ -148,6 +153,7 @@ public class Controller {
                 }
             } else {
                 System.out.println("see you next time");
+                theStage.close();
             }
         }
     }
@@ -156,7 +162,7 @@ public class Controller {
     //EFFECTS: Load all acounts from the file
     public void loadAccounts() {
         try {
-            players = Reader.readAccounts(new File(ACCOUNTS_FILE));
+            players = PlayerReader.readAccounts(new File(ACCOUNTS_FILE));
         } catch (IOException e) {
             System.out.println("there is no account");
         }

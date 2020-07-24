@@ -123,7 +123,6 @@ public class GameModelController {
 
 
     //effect: do the tings correspond to the Key pressed
-    //todo: simplifie the keyevent to string so that it is easier to test
     public void translateKeyEventPressed(String e) {
         if (e.equals("UP") && !codeList.contains(e)) {
             codeList.add(e);

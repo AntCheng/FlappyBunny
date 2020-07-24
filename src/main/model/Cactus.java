@@ -18,6 +18,7 @@ public class Cactus implements GraphicModel {
     private Floor floor;
     private boolean isTouched;
 
+    //Class cactus would appear on the floor, it serves to obstacle bunny, if bunny get touch to them, bunny would hurt
     public Cactus(Floor floor) {
         Random rand = new Random();
         this.width = 60;

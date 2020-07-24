@@ -1,6 +1,6 @@
 package model;
 
-import system.Writer;
+import system.PlayerWriter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -57,11 +57,11 @@ public class PlayerManager {
     public void saveRecord(Double record, String accountsFile)
             throws FileNotFoundException, UnsupportedEncodingException {
         currentPlayer.setRecord(record);
-        Writer writer = new Writer(new File(accountsFile));
+        PlayerWriter playerWriter = new PlayerWriter(new File(accountsFile));
         for (Player player : players) {
-            writer.write(player);
+            playerWriter.write(player);
         }
-        writer.close();
+        playerWriter.close();
         System.out.println("record saved to file " + accountsFile);
 
     }

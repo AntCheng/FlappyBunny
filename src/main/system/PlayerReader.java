@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Reader {
+public class PlayerReader {
 
 
     // EFFECTS: returns a list of accounts parsed from file; throws
@@ -20,13 +20,13 @@ public class Reader {
     }
 
     // EFFECTS: returns content of file as a list of strings, each string
-    // containing the content of one row of the file
+    // containing the player content of one row of the file
     private static List<String> readFile(File file) throws IOException {
         return Files.readAllLines(file.toPath());
     }
 
     // EFFECTS: returns a list of accounts parsed from list of strings
-    // where each string contains data for one account
+    // where each string contains data for one player
     private static List<Player> parseContent(List<String> fileContent) {
         List<Player> players = new ArrayList<>();
 
@@ -48,7 +48,7 @@ public class Reader {
     }
 
     // REQUIRES: components has size 3
-    //           element 0 represents theusername of the next account to be constructed element 1 represents
+    //           element 0 represents the username of the next account to be constructed element 1 represents
     //           element 1 represents the password
     //           elements 2 represents the name
     // EFFECTS: returns an Player constructed from components

@@ -21,7 +21,7 @@ public class Floor implements GraphicModel {
     private double velocityY;
     private double gravityOnFloor;
 
-
+    //
     public Floor(int x, int y, Bunny bunny, int type) {
         Random rand = new Random();
         this.positionX = x;

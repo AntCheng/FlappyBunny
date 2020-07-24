@@ -2,8 +2,8 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import system.Reader;
-import system.Writer;
+import system.PlayerReader;
+import system.PlayerWriter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,7 +18,7 @@ class PlayerTest {
     Player player0;
     Player player1;
     Player player2;
-    Writer testWriter;
+    PlayerWriter testPlayerWriter;
     private static final String TEST_FILE = "./data/testPlayers2";
 
 
@@ -26,7 +26,7 @@ class PlayerTest {
     void runBefore(){
         player0 = new Player("user","pass",0.0);
         try {
-            testWriter = new Writer(new File(TEST_FILE));
+            testPlayerWriter = new PlayerWriter(new File(TEST_FILE));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -62,12 +62,12 @@ class PlayerTest {
 
     @Test
     void saveTest(){
-        testWriter.write(player1); //this would call on player.save method.
-        testWriter.write(player2);
-        testWriter.close();
+        testPlayerWriter.write(player1); //this would call on player.save method.
+        testPlayerWriter.write(player2);
+        testPlayerWriter.close();
 
         try {
-            List<Player> players = Reader.readAccounts(new File("./data/testPlayers2"));
+            List<Player> players = PlayerReader.readAccounts(new File("./data/testPlayers2"));
             Player player1 = players.get(0);
             assertEquals("test1", player1.getUsername());
             assertEquals("pass1", player1.getPassword());

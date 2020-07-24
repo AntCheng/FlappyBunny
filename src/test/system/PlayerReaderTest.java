@@ -10,12 +10,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class ReaderTest {
+public class PlayerReaderTest {
 
     @Test
     void testParseAccountsFile1() {
         try {
-            List<Player> players = Reader.readAccounts(new File("./data/testPlayers2"));
+            List<Player> players = PlayerReader.readAccounts(new File("./data/testPlayers2"));
             Player player1 = players.get(0);
             assertEquals("test1", player1.getUsername());
             assertEquals("pass1", player1.getPassword());
@@ -36,7 +36,7 @@ public class ReaderTest {
     @Test
     void testIOException() {
         try {
-            Reader.readAccounts(new File("./path/does/not/exist/testAccount.txt"));
+            PlayerReader.readAccounts(new File("./path/does/not/exist/testAccount.txt"));
         } catch (IOException e) {
             // expected
         }
