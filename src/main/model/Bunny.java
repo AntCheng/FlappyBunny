@@ -122,6 +122,10 @@ public class Bunny implements GraphicModel {
         this.height = height;
     }
 
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
     public int getHp() {
         return hp;
     }

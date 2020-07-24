@@ -35,6 +35,18 @@ public class Cactus implements GraphicModel {
         return cactusImage;
     }
 
+    public double getVelocityX() {
+        return velocityX;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
     public double getPositionX() {
         return positionX;
     }

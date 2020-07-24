@@ -28,7 +28,7 @@ public class Floor implements GraphicModel {
         this.positionY = bunny.getPositionY() + (-1 + rand.nextInt(3)) * 100;
         this.velocityX = 100;
         this.height = 50;
-        this.width = 500 + rand.nextInt(300);
+        this.width = 200 + rand.nextInt(300);
         normalFloor = new Image("ground_wood.png",this.width,
                 this.height,false,false);
     }
@@ -38,8 +38,16 @@ public class Floor implements GraphicModel {
         return this.positionX;
     }
 
+    public double getVelocityX() {
+        return this.velocityX;
+    }
+
     public double getPositionY() {
         return this.positionY;
+    }
+
+    public double getHeight() {
+        return this.height;
     }
 
     public Image getImage() {

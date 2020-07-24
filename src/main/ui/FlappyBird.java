@@ -20,11 +20,15 @@ public class FlappyBird {
     Scene falppyBirdScene;
     GameModelController gmc;
     private Long lastNanoTime;
+    private Double recordTime = 0.0;
     private AnimationTimer timer;
     Canvas canvas;
     GraphicsContext gc;
+    Boolean isGameOver;
+    Controller controller;
 
-    public FlappyBird() {
+    public FlappyBird(Controller controller) {
+        this.controller = controller;
         initial();
         run();
     }
@@ -37,6 +41,7 @@ public class FlappyBird {
         root.getChildren().add(canvas);
         gmc = new GameModelController(WIDTH,HEIGHT);
         gc = canvas.getGraphicsContext2D();
+        isGameOver = false;
     }
 
     // effect: run the program, set up a timer, update and draw the graphic model in the canvas
@@ -49,18 +54,20 @@ public class FlappyBird {
                 // calculate time since last update.
                 double elapsedTime = (currentNanoTime - lastNanoTime.longValue()) / 1000000000.0;
                 lastNanoTime = currentNanoTime;
-
+                recordTime += elapsedTime;
                 //update the position (give the elapsed time)
                 gmc.update(elapsedTime);
 
                 //detect events and give the events to controller
-                falppyBirdScene.setOnKeyPressed(e -> gmc.translateKeyEventPressed(e));
-                falppyBirdScene.setOnKeyReleased(e -> gmc.translateKeyEventReleased(e));
+                falppyBirdScene.setOnKeyPressed(e -> gmc.translateKeyEventPressed(e.getCode().toString()));
+                falppyBirdScene.setOnKeyReleased(e -> gmc.translateKeyEventReleased(e.getCode().toString()));
 
                 //check on collison and game state
                 gmc.check();
                 if (gmc.isGameOver) {
                     timer.stop();
+                    isGameOver = true;
+                    controller.saveGame();
                 }
 
                 //draw graphic
@@ -75,6 +82,7 @@ public class FlappyBird {
         drawBird(gmc.getBunny(),time);
         drawFloor(gmc.getFloorList());
         drawCactus(gmc.getCactusList());
+        drawMetersAndHP();
     }
 
     public void drawBird(Bunny bunny, Double time) {
@@ -91,6 +99,21 @@ public class FlappyBird {
         for (Cactus cactus : cactusList) {
             gc.drawImage(cactus.getImage(), cactus.getPositionX(), cactus.getPositionY());
         }
+    }
+
+    public void drawMetersAndHP() {
+        String time = recordTime.toString();
+        gc.fillText(time + " meters",950,50);
+        gc.fillText("HP " + String.valueOf(gmc.getBunny().getHp()), 10,50);
+
+    }
+
+    public Double getTime() {
+        return recordTime;
+    }
+
+    public boolean getIsGameOver() {
+        return isGameOver;
     }
 
     public Scene getScene() {

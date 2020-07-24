@@ -10,7 +10,7 @@
 
 <AnchorPane id="loginScene" blendMode="DARKEN" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.Controller">
     <children>
-        <Button layoutX="189.0" layoutY="278.0" mnemonicParsing="false" onAction="#login" text="Login" />
+        <Button layoutX="189.0" layoutY="278.0" mnemonicParsing="false" onAction="#loginAndGotoMain" text="Login" />
         <PasswordField fx:id="password" layoutX="189.0" layoutY="200.0" promptText="Password" />
         <TextField fx:id="userName" layoutX="189.0" layoutY="143.0" promptText="Username" />
         <Label fx:id="status" layoutX="189.0" layoutY="342.0" text="username or password incorrect" textFill="#e40f0f" visible="false" />

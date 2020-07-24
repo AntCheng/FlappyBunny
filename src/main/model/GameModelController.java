@@ -1,7 +1,6 @@
 package model;
 
 
-import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyEvent;
 
 import java.util.ArrayList;
@@ -22,71 +21,120 @@ public class GameModelController {
     private int canvasWidth;
     private int canvasHeight;
     private double pastTime;
-    private double someTime;
+    private double floorFrequenceTime;
 
     public GameModelController(int x, int y) {
         bunny = new Bunny(50, 750);
         floorList = new ArrayList<Floor>();
         codeList = new ArrayList<>();
         cactusList = new ArrayList<Cactus>();
-        setup();
         this.canvasWidth = x;
         this.canvasHeight = y;
+        setup();
     }
 
+    //MODIFIES: this
+    //EFFECT: set up the game, clear all the floor and cactusList and set the isGameOver to false
     public void setup() {
         floorList.clear();
+        cactusList.clear();
         isGameOver = false;
+        pastTime = 0;
+        floorFrequenceTime = 0;
     }
 
     public Bunny getBunny() {
         return bunny;
     }
 
+    public ArrayList<String> getCodeList() {
+        return codeList;
+    }
+
+    public void setPastTime(double pastTime) {
+        this.pastTime = pastTime;
+    }
+
+    public void setFloorFrequenceTime(double floorFrequenceTime) {
+        this.floorFrequenceTime = floorFrequenceTime;
+    }
+
+    public double getPastTime() {
+        return pastTime;
+    }
+
+    public double getFloorFrequenceTime() {
+        return floorFrequenceTime;
+    }
+
     public ArrayList<Floor> getFloorList() {
         return floorList;
     }
 
-    public List<Cactus> getCactusList() {
+    public ArrayList<Cactus> getCactusList() {
         return cactusList;
     }
 
-    //effect: update all graphic model in the after elapsedTime
+    //MODIFIES: this
+    //effect: update all graphic model in the after elapsedTime, add the elapsedTime to the pastTime
+    // and floorFrequenceTime
     public void update(Double elapsedTime) {
         bunny.update(elapsedTime);
         updateCactusList(elapsedTime);
+        updateFloorList(elapsedTime);
 
         pastTime += elapsedTime;
-        someTime += elapsedTime;
-        if ((floorList.size() < 3 || someTime > 2) && pastTime > 3) {
+        floorFrequenceTime += elapsedTime;
+
+    }
+
+    //MODIFIES: this
+    //EFFECTS: generate floor and cactus
+    public void checkFloorCactusSize() {
+        //floorList.size() < 3 ||
+        if ((floorFrequenceTime > 1.5) && pastTime > 3) {
             Floor floor = new Floor(canvasWidth,canvasHeight, bunny,0);
             cactusList.add(new Cactus(floor));
             floorList.add(floor);
-            someTime = 0;
+            floorFrequenceTime = 0;
         }
+    }
+
+    //MODIFIES: this
+    //EFFECT: all the floor update
+    public void updateFloorList(double time) {
+        for (Floor floor : floorList) {
+            floor.update(time);
+        }
+    }
+
+    //MODIFIES: this
+    //EFFECTS: check if the floor is out of the scene, if so remove them
+    public void checkFloorListOut() {
         Iterator<Floor> floorIterator = floorList.iterator();
         while (floorIterator.hasNext()) {
             Floor floor = floorIterator.next();
-            floor.update(elapsedTime);
             if (floor.isOut()) {
                 floorIterator.remove();
             }
         }
     }
 
+
+
     //effect: do the tings correspond to the Key pressed
     //todo: simplifie the keyevent to string so that it is easier to test
-    public void translateKeyEventPressed(KeyEvent e) {
-        if (e.getCode().toString() == "UP" && !codeList.contains(e.getCode().toString())) {
-            codeList.add(e.getCode().toString());
+    public void translateKeyEventPressed(String e) {
+        if (e.equals("UP") && !codeList.contains(e)) {
+            codeList.add(e);
             bunny.burstFly();
         }
     }
 
     //effect: do the things correspond to the key released
-    public void translateKeyEventReleased(KeyEvent e) {
-        if (e.getCode().toString() == "UP" && codeList.contains(e.getCode().toString())) {
-            codeList.remove(e.getCode().toString());
+    public void translateKeyEventReleased(String e) {
+        if (e.equals("UP") && codeList.contains(e)) {
+            codeList.remove(e);
         }
     }
 
@@ -98,16 +146,24 @@ public class GameModelController {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: check if the hp get below 0, if so, change isGameOver to true;
     public void checkHP() {
         if (bunny.getHp() <= 0) {
             isGameOver = true;
         }
     }
 
-    //effect: check on all graphic model collisions and if the game end
+    //MODIFIES: this
+    //EFFECT: check on all graphic model collisions: checkHP, check if bunny stand on a floor,
+    // check if bunny touch any cactus
+    // check if generate new floor and cactus
+    // check if any floor is out
     public void check() {
         checkHP();
         bunny.checkStandFloor(floorList);
         bunny.checkTouchCactus(cactusList);
+        checkFloorCactusSize();
+        checkFloorListOut();
     }
 }
