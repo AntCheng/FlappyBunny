@@ -21,7 +21,7 @@ public class Floor implements GraphicModel {
     private double velocityY;
     private double gravityOnFloor;
 
-    //
+    //The floor class in this game, which would floating on the game and may carry bunny, cactus and other things
     public Floor(int x, int y, Bunny bunny, int type) {
         Random rand = new Random();
         this.positionX = x;

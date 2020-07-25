@@ -6,13 +6,14 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    Controller controller = new Controller();
+    Controller controller;
 
     @Override
     //this method is require by javafx library to start my game.
     public void start(Stage theStage) throws Exception {
         //controller.startLoginScene(); this one is GUI
         //((Node)event.getSource()).getScene().getWindow().hide();
+        controller = new Controller(theStage);
         controller.loginOrRigister();   //this one is console-based
     }
 

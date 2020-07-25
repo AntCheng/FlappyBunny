@@ -22,7 +22,6 @@ class PlayerManagerTest {
     void runBefore(){
         file = new File("./data/testPlayers");
 
-        playerManager = new PlayerManager(players);
 
         try {
             printWriter = new PrintWriter(file, "UTF-8");

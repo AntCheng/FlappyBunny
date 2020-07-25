@@ -50,8 +50,8 @@ public class Controller {
 
 
 
-    public Controller() {
-        theStage = new Stage();
+    public Controller(Stage theStage) {
+        this.theStage = theStage;
         loadAccounts();
         playerManager = new PlayerManager(players);
         input = new Scanner(System.in);
@@ -209,17 +209,9 @@ public class Controller {
         }
     }
 
-    //effect: start the game, go to the game window, in the game mode practise.
-//    public void gotoPractiseScene() {
-//        practise = new Practise();
-//        Scene practiseScene = practise.getScene();
-//        Stage practiseStage = new Stage();
-//        //practiseStage.initModality(Modality.WINDOW_MODAL);
-//        practiseStage.setScene(practiseScene);
-//        practiseStage.show();
-//        mainScene.getScene().getWindow().hide();
-//    }
 
+    //MODIFIES: this
+    //EFFECT: create flappybird scene and set this scene, which is the game scene and start the game.
     public void gotoFlappyBirdScene() {
         flappyBird = new FlappyBird(this);
         Scene flappyBirdScene = flappyBird.getScene();

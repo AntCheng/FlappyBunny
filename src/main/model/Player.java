@@ -30,6 +30,7 @@ public class Player {
     }
 
     //EFFECTS: Save this player information to the file open by printWriter
+    //         on the format username,password,record
     public void save(PrintWriter printWriter) {
         printWriter.print(username);
         printWriter.print(",");
