@@ -228,7 +228,7 @@ public class Bunny implements GraphicModel {
 
     }
 
-    //modifies: this
+    //modifies: this and cactusList
     //effect: check if this bunny intersect with any cactus, if so, minus one hp
     public void checkTouchCactus(List<Cactus> cactusList) {
         for (Cactus cactus : cactusList) {
