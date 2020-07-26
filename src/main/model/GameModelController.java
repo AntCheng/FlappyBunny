@@ -24,7 +24,7 @@ public class GameModelController {
     private double pastTime;
     private double floorFrequenceTime;
 
-    public GameModelController(int x, int y) {
+    public GameModelController(int x, int y) throws IOException {
         bunny = new Bunny(50, 750);
         floorList = new ArrayList<Floor>();
         codeList = new ArrayList<>();
@@ -91,7 +91,7 @@ public class GameModelController {
 
     //MODIFIES: this
     //EFFECTS: generate floor and cactus
-    public void checkFloorCactusSize() {
+    public void checkFloorCactusSize() throws IOException {
         //floorList.size() < 3 ||
         if ((floorFrequenceTime > 1.5) && pastTime > 3) {
             Floor floor = new Floor(canvasWidth,canvasHeight, bunny,0);
@@ -171,7 +171,7 @@ public class GameModelController {
     // check if bunny touch any cactus
     // check if generate new floor and cactus
     // check if any floor is out
-    public void check() {
+    public void check() throws IOException {
         checkHP();
         bunny.checkStandFloor(floorList);
         bunny.checkTouchCactus(cactusList);

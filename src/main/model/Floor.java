@@ -27,18 +27,15 @@ public class Floor implements GraphicModel {
     private double gravityOnFloor;
 
     //The floor class in this game, which would floating on the game and may carry bunny, cactus and other things
-    public Floor(int x, int y, Bunny bunny, int type) {
+    public Floor(int x, int y, Bunny bunny, int type) throws IOException {
         Random rand = new Random();
         this.positionX = x;
         this.positionY = bunny.getPositionY() + (-1 + rand.nextInt(3)) * 100;
         this.velocityX = 100;
         this.height = 50;
         this.width = 200 + rand.nextInt(300);
-        try {
-            normalFloor = ImageIO.read(floorFile).getScaledInstance((int)width,(int)height,Image.SCALE_SMOOTH);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        normalFloor = ImageIO.read(floorFile).getScaledInstance((int)width,(int)height,Image.SCALE_SMOOTH);
+
 //        normalFloor = new Image("ground_wood.png",this.width,
 //                this.height,false,false);
     }

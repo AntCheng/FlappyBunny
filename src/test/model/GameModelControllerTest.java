@@ -4,6 +4,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,15 +23,20 @@ class GameModelControllerTest {
 
     @BeforeEach
     void runBefore(){
-        gmc = new GameModelController(1000,800);
-        bunny = gmc.getBunny();
-        floor1 = new Floor(1000, 800,bunny,0);
-        floor2 = new Floor(1000, 800,bunny,0);
+        try {
+            gmc = new GameModelController(1000,800);
+            bunny = gmc.getBunny();
+            floor1 = new Floor(1000, 800,bunny,0);
+            floor2 = new Floor(1000, 800,bunny,0);
+            cactus1 = new Cactus(floor1);
+            cactus2 = new Cactus(floor2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         floorList = gmc.getFloorList();
         floorList.add(floor1);
         floorList.add(floor2);
-        cactus1 = new Cactus(floor1);
-        cactus2 = new Cactus(floor2);
         cactusList = gmc.getCactusList();
         cactusList.add(cactus1);
         cactusList.add(cactus2);
@@ -126,7 +132,7 @@ class GameModelControllerTest {
     }
 
     @Test
-    void checkFloorCactusSizeTest() {
+    void checkFloorCactusSizeTest() throws IOException {
         gmc.setFloorFrequenceTime(2);
 
         //no effect case
@@ -168,7 +174,7 @@ class GameModelControllerTest {
 
 
     @Test
-    void checkTest() {
+    void checkTest() throws IOException {
         cactus1.setPositionX(300);
         cactus2.setPositionX(400);
         floor1.setPositionX(300);

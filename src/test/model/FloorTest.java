@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.awt.geom.Rectangle2D;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,9 +23,14 @@ class FloorTest {
 
     @BeforeEach
     void runBefore(){
-        bunny = new Bunny(50,750);
-        floor1 = new Floor(1000, 800,bunny,0);
-        floor2 = new Floor(1000, 800,bunny,0);
+        try {
+            bunny = new Bunny(50,750);
+            floor1 = new Floor(1000, 800,bunny,0);
+            floor2 = new Floor(1000, 800,bunny,0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         floorList = new ArrayList<>();
         floorList.add(floor1);
         floorList.add(floor2);

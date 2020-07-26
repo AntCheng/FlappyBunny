@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Scanner;
 
 
+//ATTRIBUTE: some structure of this class is inspired from tellerAPP
+// TellerAPP source: https://github.students.cs.ubc.ca/CPSC210/TellerApp
 public class Controller {
 
     private static final String ACCOUNTS_FILE = "./data/players";
@@ -38,7 +40,11 @@ public class Controller {
 
     public Controller() {
 
-        gmc = new GameModelController(1000,800);
+        try {
+            gmc = new GameModelController(1000,800);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         bunny = gmc.getBunny();
         cactusList = gmc.getCactusList();
         loadAccounts();
@@ -277,14 +283,14 @@ public class Controller {
         System.out.println();
         System.out.println("Bunny currently has " + bunny.getHp() + "HP");
         String awayGround = String.valueOf(800 - bunny.getPositionY());
-        System.out.println("the bunny is currently at position " + awayGround);
+        System.out.println("the bunny is currently " + awayGround + "meters away from ground");
         System.out.println("the speed of the bunny is 100 m/s");
     }
 
     public void printCactusSituation(Cactus cactus) {
         System.out.println();
         String meterAway = String.valueOf(cactus.getPositionX() - 50);
-        System.out.println("One cactus is " + meterAway + "meters away");
+        System.out.println("One cactus is " + meterAway + " meters away");
         String awayGround = String.valueOf(800 - cactus.getPositionY());
         System.out.println("it is " + awayGround + "meters from ground");
     }

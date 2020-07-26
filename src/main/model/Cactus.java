@@ -23,15 +23,13 @@ public class Cactus implements GraphicModel {
     private File cactusFile = new File("src/main/resources/cactus.png");
 
     //Class cactus would appear on the floor, it serves to obstacle bunny, if bunny get touch to them, bunny would hurt
-    public Cactus(Floor floor) {
+    public Cactus(Floor floor) throws IOException {
         Random rand = new Random();
         this.width = 60;
         this.height = 60;
-        try {
-            this.cactusImage = ImageIO.read(cactusFile).getScaledInstance(width,height,Image.SCALE_SMOOTH);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        this.cactusImage = ImageIO.read(cactusFile).getScaledInstance(width,height,Image.SCALE_SMOOTH);
+
 //        this.cactusImage = new Image("cactus.png", 60,
 //                60, false,false);
         this.positionX = floor.getPositionX() + rand.nextInt((int) (floor.getWidth() - 1));

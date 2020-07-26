@@ -30,17 +30,19 @@ public class Bunny implements GraphicModel {
     private boolean walkState = true;
     private boolean onFloor = false;
     private int hp;
-    private File fileWalk1 = new File("src/main/resources/Players/bunny1_walk1.png");
-    private File fileWalk2 = new File("src/main/resources/Players/bunny1_walk2.png");
+    private File fileWalk1;
+    private File fileWalk2;
 
     //effect: instantiate a bunny object
-    public Bunny(int x, int y) {
-        try {
-            walk1 = ImageIO.read(fileWalk1).getScaledInstance((int)width,(int)height,Image.SCALE_SMOOTH);
-            walk2 = ImageIO.read(fileWalk2).getScaledInstance((int)width,(int)height,Image.SCALE_SMOOTH);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Bunny(int x, int y) throws IOException {
+
+        fileWalk1 = new File("src/main/resources/Players/bunny1_walk1.png");
+        fileWalk2 = new File("src/main/resources/Players/bunny1_walk2.png");
+
+
+        walk1 = ImageIO.read(fileWalk1).getScaledInstance((int)width,(int)height,Image.SCALE_SMOOTH);
+        walk2 = ImageIO.read(fileWalk2).getScaledInstance((int)width,(int)height,Image.SCALE_SMOOTH);
+
 
 //        walk1 = new Image("/Players/bunny1_walk1.png",50,50,
 //                false,false);
@@ -74,6 +76,8 @@ public class Bunny implements GraphicModel {
 //    public double getWalkStateTime() {
 //        return walkStateTime;
 //    }
+
+
 
     public boolean getWalkState() {
         return walkState;
