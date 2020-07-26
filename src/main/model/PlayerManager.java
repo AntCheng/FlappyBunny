@@ -5,6 +5,9 @@ import system.PlayerWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 // PlayerManager is to manager the players in the file.
@@ -51,6 +54,17 @@ public class PlayerManager {
         }
         return false;
     }
+
+    public void sortPlayers() {
+        Collections.sort(players, new Comparator<Player>() {
+            @Override
+            public int compare(Player player1, Player player2) {
+                return ((int)player2.getRecord() - (int) player1.getRecord());
+            }
+        }
+        );
+    }
+
 
     //MODIFIES: this
     //EFFECTS: save the player accounts information to the file

@@ -21,7 +21,7 @@ public class Player {
         return password;
     }
 
-    public Double getRecord() {
+    public double getRecord() {
         return record;
     }
 

@@ -102,6 +102,7 @@ public class Controller {
     }
 
     public void viewPlayers() {
+        playerManager.sortPlayers();
         for (Player player : players) {
             System.out.println(player.toString());
         }
@@ -246,7 +247,6 @@ public class Controller {
                 try {
                     playerManager.saveRecord(currentRecord, ACCOUNTS_FILE);
                     System.out.println("see you next time");
-                    theStage.close();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (UnsupportedEncodingException e) {

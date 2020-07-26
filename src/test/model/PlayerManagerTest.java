@@ -82,4 +82,20 @@ class PlayerManagerTest {
         assertEquals("pass1",playersAfterSave.get(0).getPassword());
         assertEquals(30.0,playersAfterSave.get(0).getRecord());
     }
+
+    @Test
+    void sortPlayersTest(){
+        Player player1 = new Player("test1","user1",2.0);
+        Player player2 = new Player("test2","pass2",1.0);
+        Player player3 = new Player("test3","pass3",3.0);
+
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+
+        playerManager.sortPlayers();
+        assertEquals(player3,players.get(0));
+        assertEquals(player1,players.get(1));
+        assertEquals(player2,players.get(2));
+    }
 }

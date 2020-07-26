@@ -16,5 +16,6 @@ A *bulleted* list:
 ### User Stories:
 - *As a user, I want to be able to have a login scene to login to this game.*
 - *As a user, I want to be able to add more players account to my player manager (register account).*
-- *As a user, I want to be able show all the player accounts*
+- *As a user, I want to be able show all the player accounts.*
+- *As a user, I want to be able to sort the players according to their records.*
 - *As a user, I want to be able to know my bunny hp, velocity, positions and the obstacles's position during the game.*
