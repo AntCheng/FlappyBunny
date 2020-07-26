@@ -84,4 +84,10 @@ class PlayerTest {
         }
     }
 
+    @Test
+    void toStringtest(){
+        String player0String = "Username: " + "user" + "  Record: " + 0.0;
+        assertEquals(player0String,player0.toString());
+    }
+
 }
