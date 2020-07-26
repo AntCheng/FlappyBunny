@@ -1,9 +1,6 @@
 package model;
 
-import javafx.geometry.Rectangle2D;
-import javafx.scene.canvas.GraphicsContext;
-
-import java.util.List;
+import java.awt.geom.Rectangle2D;
 
 public interface GraphicModel {
 

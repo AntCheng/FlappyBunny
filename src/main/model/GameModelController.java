@@ -3,6 +3,7 @@ package model;
 
 import javafx.scene.input.KeyEvent;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -120,6 +121,18 @@ public class GameModelController {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS check if the cactus in the list is out, if so, removr them
+    public void checkCactusListOUt() {
+        Iterator<Cactus> cactusIterator = cactusList.iterator();
+        while (cactusIterator.hasNext()) {
+            Cactus cactus = cactusIterator.next();
+            if (cactus.isOut()) {
+                cactusIterator.remove();
+            }
+        }
+    }
+
 
 
     //effect: do the tings correspond to the Key pressed
@@ -164,5 +177,9 @@ public class GameModelController {
         bunny.checkTouchCactus(cactusList);
         checkFloorCactusSize();
         checkFloorListOut();
+        checkCactusListOUt();
     }
+
+
+
 }

@@ -51,7 +51,7 @@ public class PlayerReader {
     }
 
     // REQUIRES: components has size 3
-    //           element 0 represents the username of the next account to be constructed element 1 represents
+    //           element 0 represents the username
     //           element 1 represents the password
     //           elements 2 represents the name
     // EFFECTS: returns an Player constructed from components

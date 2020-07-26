@@ -1,6 +1,6 @@
 package model;
 
-import javafx.embed.swing.JFXPanel;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ class GameModelControllerTest {
     private Cactus cactus1;
     private Cactus cactus2;
     private ArrayList<Cactus> cactusList;
-    private JFXPanel jfxPanel = new JFXPanel();
+    //private JFXPanel jfxPanel = new JFXPanel();
 
     @BeforeEach
     void runBefore(){
@@ -155,6 +155,15 @@ class GameModelControllerTest {
         gmc.checkFloorListOut();
         assertEquals(1,floorList.size());
         assertEquals(floor2,floorList.get(0));
+    }
+
+    @Test
+    void checkCactusOutTest() {
+        cactus1.setPositionX(-70);
+        cactus2.setPositionX(0);
+        gmc.checkCactusListOUt();
+        assertEquals(1,cactusList.size());
+        assertEquals(cactus2,cactusList.get(0));
     }
 
 

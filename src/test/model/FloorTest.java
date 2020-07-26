@@ -1,10 +1,10 @@
 package model;
 
-import javafx.embed.swing.JFXPanel;
-import javafx.geometry.Rectangle2D;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +18,7 @@ class FloorTest {
     private Floor floor2;
 
     private ArrayList<Cactus> cactusList;
-    private JFXPanel jfxPanel = new JFXPanel();
+    //private JFXPanel jfxPanel = new JFXPanel();
 
     @BeforeEach
     void runBefore(){
@@ -32,7 +32,7 @@ class FloorTest {
 
     @Test
     void getFloorImage(){
-        assertEquals(floor1.getImage().getHeight(),floor2.getImage().getHeight());
+        assertEquals(floor1.getImage().getHeight(null),floor2.getImage().getHeight(null));
     }
 
     @Test
@@ -52,12 +52,12 @@ class FloorTest {
         floor1.setPositionX(500);
         floor1.update(1);
         assertEquals(400,floor1.getPositionX());
-        assertEquals(101,floor1.getVelocityX());
+        assertEquals(100,floor1.getVelocityX());
     }
 
     @Test
     void getBoundary() {
-        assertEquals( new Rectangle2D(floor1.getPositionX(),floor1.getPositionY(),floor1.getWidth(),
+        assertEquals( new Rectangle2D.Double(floor1.getPositionX(), floor1.getPositionY(), floor1.getWidth(),
                 floor1.getHeight()), floor1.getBoundary());
     }
 

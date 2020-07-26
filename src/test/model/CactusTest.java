@@ -1,10 +1,10 @@
 package model;
 
-import javafx.embed.swing.JFXPanel;
-import javafx.geometry.Rectangle2D;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,7 +19,7 @@ class CactusTest {
     private Cactus cactus1;
     private Cactus cactus2;
     private ArrayList<Cactus> cactusList;
-    private JFXPanel jfxPanel = new JFXPanel();
+
 
     @BeforeEach
     void runBefore(){
@@ -41,8 +41,8 @@ class CactusTest {
 
     @Test
     void getCactusImage(){
-        assertEquals(cactus1.getImage().getWidth(),cactus2.getImage().getWidth());
-        assertEquals(cactus2.getImage().getHeight(),cactus2.getImage().getHeight());
+        assertEquals(cactus1.getImage().getWidth(null),cactus2.getImage().getWidth(null));
+        assertEquals(cactus2.getImage().getHeight(null),cactus2.getImage().getHeight(null));
     }
 
     @Test
@@ -71,17 +71,17 @@ class CactusTest {
         cactus1.setPositionX(500);
         cactus1.update(1);
         assertEquals(400,cactus1.getPositionX());
-        assertEquals(101,cactus1.getVelocityX());
+        assertEquals(100,cactus1.getVelocityX());
 
         cactus1.update(4);
-        assertEquals(-4,cactus1.getPositionX());
-        assertEquals(102,cactus1.getVelocityX());
+        assertEquals(0,cactus1.getPositionX());
+        assertEquals(100,cactus1.getVelocityX());
     }
 
     @Test
     void getBoundaryTest() {
-        assertEquals(new Rectangle2D(cactus1.getPositionX(),cactus1.getPositionY(),
-                cactus1.getWidth() - 5,cactus1.getHeight() - 5), cactus1.getBoundary());
+        assertEquals(new Rectangle2D.Double(cactus1.getPositionX(), cactus1.getPositionY(),
+                cactus1.getWidth() - 5, cactus1.getHeight() - 5), cactus1.getBoundary());
     }
 
     @Test
@@ -93,5 +93,12 @@ class CactusTest {
         assertEquals(true,cactus1.intersects(bunny));
     }
 
+    @Test
+    void isOutTest(){
+        cactus1.setPositionX(100);
+        assertEquals(false,cactus1.isOut());
+        cactus1.setPositionX(-70);
+        assertEquals(true,cactus1.isOut());
+    }
 
 }

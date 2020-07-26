@@ -1,8 +1,14 @@
 package model;
 
-import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
 
+
+
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 //class Bunny, player would control the instantiation of this object, which is a bunny to play this game.
@@ -24,13 +30,22 @@ public class Bunny implements GraphicModel {
     private boolean walkState = true;
     private boolean onFloor = false;
     private int hp;
+    private File fileWalk1 = new File("src/main/resources/Players/bunny1_walk1.png");
+    private File fileWalk2 = new File("src/main/resources/Players/bunny1_walk2.png");
 
     //effect: instantiate a bunny object
     public Bunny(int x, int y) {
-        walk1 = new Image("/Players/bunny1_walk1.png",50,50,
-                false,false);
-        walk2 = new Image("/Players/bunny1_walk2.png",50,50,
-                false,false);
+        try {
+            walk1 = ImageIO.read(fileWalk1).getScaledInstance((int)width,(int)height,Image.SCALE_SMOOTH);
+            walk2 = ImageIO.read(fileWalk2).getScaledInstance((int)width,(int)height,Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+//        walk1 = new Image("/Players/bunny1_walk1.png",50,50,
+//                false,false);
+//        walk2 = new Image("/Players/bunny1_walk2.png",50,50,
+//                false,false);
         this.walkStateTime = 0;
         this.positionX = x;
         this.positionY = y;
@@ -241,10 +256,13 @@ public class Bunny implements GraphicModel {
 
 
 
+
+
     @Override
     //effect: return the boundary of this object
     public Rectangle2D getBoundary() {
-        return new Rectangle2D(positionX,positionY,width,height);
+        return new Rectangle2D.Double(this.getPositionX(),this.getPositionY(),
+                this.getWidth(),this.getHeight());
     }
 
     @Override

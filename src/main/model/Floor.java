@@ -1,8 +1,12 @@
 package model;
 
-import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
 
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 public class Floor implements GraphicModel {
@@ -14,6 +18,7 @@ public class Floor implements GraphicModel {
 
     private Image normalFloor;
     private Image floor2;
+    private File floorFile = new File("src/main/resources/ground_wood.png");
     private double walkStateTime;
     private double positionX;
     private double positionY;
@@ -29,8 +34,13 @@ public class Floor implements GraphicModel {
         this.velocityX = 100;
         this.height = 50;
         this.width = 200 + rand.nextInt(300);
-        normalFloor = new Image("ground_wood.png",this.width,
-                this.height,false,false);
+        try {
+            normalFloor = ImageIO.read(floorFile).getScaledInstance((int)width,(int)height,Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        normalFloor = new Image("ground_wood.png",this.width,
+//                this.height,false,false);
     }
 
 
@@ -76,12 +86,11 @@ public class Floor implements GraphicModel {
     @Override
     public void update(double time) {
         this.positionX -= velocityX * time;
-        velocityX++;
     }
 
     @Override
-    public Rectangle2D getBoundary() {
-        return new Rectangle2D(positionX,positionY,width,height);
+    public Rectangle2D.Double getBoundary() {
+        return new java.awt.geom.Rectangle2D.Double(positionX,positionY,width,height);
     }
 
     @Override

@@ -1,14 +1,17 @@
 package model;
 
-import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 public class Cactus implements GraphicModel {
 
-    private double width;
-    private double height;
+    private int width;
+    private int height;
 
     private Image cactusImage;
     private double positionX;
@@ -17,14 +20,20 @@ public class Cactus implements GraphicModel {
     private double velocityY;
     private Floor floor;
     private boolean isTouched;
+    private File cactusFile = new File("src/main/resources/cactus.png");
 
     //Class cactus would appear on the floor, it serves to obstacle bunny, if bunny get touch to them, bunny would hurt
     public Cactus(Floor floor) {
         Random rand = new Random();
         this.width = 60;
         this.height = 60;
-        this.cactusImage = new Image("cactus.png", 60,
-                60, false,false);
+        try {
+            this.cactusImage = ImageIO.read(cactusFile).getScaledInstance(width,height,Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        this.cactusImage = new Image("cactus.png", 60,
+//                60, false,false);
         this.positionX = floor.getPositionX() + rand.nextInt((int) (floor.getWidth() - 1));
         this.positionY = floor.getPositionY() - 50;
         this.velocityX = 100;
@@ -73,15 +82,23 @@ public class Cactus implements GraphicModel {
         return isTouched;
     }
 
+
+
+    public boolean isOut() {
+        if (positionX + width < 0) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void update(double time) {
         this.positionX -= velocityX * time;
-        velocityX++;
     }
 
     @Override
     public Rectangle2D getBoundary() {
-        return new Rectangle2D(positionX,positionY,width - 5,height - 5);
+        return new Rectangle2D.Double(positionX,positionY,width - 5,height - 5);
     }
 
     @Override

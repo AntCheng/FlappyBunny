@@ -1,17 +1,10 @@
 package model;
 
-import javafx.application.Application;
-import javafx.embed.swing.JFXPanel;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,7 +19,7 @@ class BunnyTest {
     private Cactus cactus1;
     private Cactus cactus2;
     private ArrayList<Cactus> cactusList;
-    private JFXPanel jfxPanel = new JFXPanel();
+
 
     @BeforeEach
 
@@ -49,10 +42,7 @@ class BunnyTest {
     @Test
     // RuntimeException: internal graphic not initialized yet
     public void getWalkImageTest() {
-        Image walk1 = new Image("/Players/bunny1_walk1.png",50,50,
-                false,false);
-        Image walk2 = new Image("/Players/bunny1_walk2.png",50, 50,
-                false,false);
+
 
         assertEquals(bunny.getWalk1() ,bunny.getWalkImage(0.1));
         //assertEquals(0.1, bunny.getWalkStateTime());
@@ -184,8 +174,8 @@ class BunnyTest {
 
     @Test
     public void getBoundaryTest(){
-        assertEquals( new Rectangle2D(bunny.getPositionX(),bunny.getPositionY(),bunny.getWidth(),bunny.getHeight()),
-                bunny.getBoundary());
+        assertEquals( new Rectangle2D.Double(bunny.getPositionX(), bunny.getPositionY(), bunny.getWidth(),
+                bunny.getHeight()), bunny.getBoundary());
     }
 
     @Test

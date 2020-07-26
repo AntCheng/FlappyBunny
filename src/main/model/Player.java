@@ -29,6 +29,12 @@ public class Player {
         this.record = record;
     }
 
+    //EFFECTS: return the string of this account
+    //todo: test have not made
+    public String toString() {
+        return "Username: " + username + "  Record: " + record.toString();
+    }
+
     //EFFECTS: Save this player information to the file open by printWriter
     //         on the format username,password,record
     public void save(PrintWriter printWriter) {
