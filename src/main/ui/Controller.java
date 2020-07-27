@@ -30,6 +30,7 @@ public class Controller {
     ArrayList<Cactus> cactusList;
     Double gameTime = 0.0;
     int currentHP = 3;
+    boolean isGoing;
 
 
     FlappyBunny flappyBunny;
@@ -39,7 +40,10 @@ public class Controller {
 
 
     public Controller() {
+        initial();
+    }
 
+    public void initial() {
         try {
             gmc = new GameModelController(1000,800);
         } catch (IOException e) {
@@ -61,7 +65,7 @@ public class Controller {
 
 
     public void runGame() throws IOException {
-        boolean isGoing = true;
+        isGoing = true;
         String command = null;
 
         while (isGoing) {
@@ -77,6 +81,7 @@ public class Controller {
         }
 
         System.out.println("\nGoodbye!");
+        // put initial() here to start another round?
     }
 
     public void displayMenu() {
@@ -235,7 +240,7 @@ public class Controller {
 
     //MODIFIES:this
     //EFFECT: save the current information for the reader, write into the file ACCOUNTS_FILE
-    public void saveGame() {
+    public void saveGame() throws IOException {
         System.out.println("Your bunny died....");
         if (gmc.isGameOver) {
             Double currentRecord = gmc.getPastTime();
@@ -247,6 +252,7 @@ public class Controller {
                 try {
                     playerManager.saveRecord(currentRecord, ACCOUNTS_FILE);
                     System.out.println("see you next time");
+                    isGoing = false;
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (UnsupportedEncodingException e) {
@@ -254,6 +260,7 @@ public class Controller {
                 }
             } else {
                 System.out.println("see you next time");
+                isGoing = false;
             }
         }
     }
