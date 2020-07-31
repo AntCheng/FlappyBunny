@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,12 +14,12 @@ class GameModelControllerTest {
 
     public GameModelController gmc;
     public Bunny bunny;
-    public ArrayList<Floor> floorList;
+    public List<Floor> floorList;
     private Floor floor1;
     private Floor floor2;
     private Cactus cactus1;
     private Cactus cactus2;
-    private ArrayList<Cactus> cactusList;
+    private List<Cactus> cactusList;
     //private JFXPanel jfxPanel = new JFXPanel();
 
     @BeforeEach
@@ -68,39 +69,39 @@ class GameModelControllerTest {
 
     }
 
-    @Test
-    void translateKeyEventPressedTest() {
-        gmc.translateKeyEventPressed("UP");
-        assertEquals("UP",gmc.getCodeList().get(0));
-        assertEquals(-500,bunny.getVelocityY());
-
-        gmc.translateKeyEventPressed("UP");
-        assertEquals("UP",gmc.getCodeList().get(0));
-        assertEquals(-500,bunny.getVelocityY());
-
-        gmc.translateKeyEventPressed("lol");
-        assertEquals(1,gmc.getCodeList().size());
-        assertEquals(-500,bunny.getVelocityY());
-    }
-
-    @Test
-    void translateKeyEventReleasedTest() {
-        //contain UP, releaseUP
-        gmc.translateKeyEventPressed("UP");
-        gmc.translateKeyEventReleased("UP");
-        assertEquals(0,gmc.getCodeList().size());
-        assertEquals(-500,bunny.getVelocityY());
-
-        gmc.translateKeyEventReleased("UP");
-        assertEquals(0,gmc.getCodeList().size());
-        assertEquals(-500,bunny.getVelocityY());
-
-        //contain UP, release Down
-        gmc.getCodeList().add("UP");
-        gmc.translateKeyEventReleased("DOWN");
-        assertEquals(1,gmc.getCodeList().size());
-        assertEquals(-500,bunny.getVelocityY());
-    }
+//    @Test
+//    void translateKeyEventPressedTest() {
+//        gmc.translateKeyEventPressed("UP");
+//        assertEquals("UP",gmc.getCodeList().get(0));
+//        assertEquals(-500,bunny.getVelocityY());
+//
+//        gmc.translateKeyEventPressed("UP");
+//        assertEquals("UP",gmc.getCodeList().get(0));
+//        assertEquals(-500,bunny.getVelocityY());
+//
+//        gmc.translateKeyEventPressed("lol");
+//        assertEquals(1,gmc.getCodeList().size());
+//        assertEquals(-500,bunny.getVelocityY());
+//    }
+//
+//    @Test
+//    void translateKeyEventReleasedTest() {
+//        //contain UP, releaseUP
+//        gmc.translateKeyEventPressed("UP");
+//        gmc.translateKeyEventReleased("UP");
+//        assertEquals(0,gmc.getCodeList().size());
+//        assertEquals(-500,bunny.getVelocityY());
+//
+//        gmc.translateKeyEventReleased("UP");
+//        assertEquals(0,gmc.getCodeList().size());
+//        assertEquals(-500,bunny.getVelocityY());
+//
+//        //contain UP, release Down
+//        gmc.getCodeList().add("UP");
+//        gmc.translateKeyEventReleased("DOWN");
+//        assertEquals(1,gmc.getCodeList().size());
+//        assertEquals(-500,bunny.getVelocityY());
+//    }
 
     @Test
     void updateCactusListTest() {

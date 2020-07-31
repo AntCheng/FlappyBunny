@@ -1,9 +1,11 @@
 package ui;
 
-import javafx.stage.Stage;
+
 import model.*;
 import system.PlayerReader;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -32,9 +34,10 @@ public class Controller {
     int currentHP = 3;
     boolean isGoing;
 
+    JFrame mainFrame;
 
     FlappyBunny flappyBunny;
-    Stage theStage;
+
     private Scanner input;
 
 
@@ -44,6 +47,11 @@ public class Controller {
     }
 
     public void initial() {
+        mainFrame = new JFrame();
+        mainFrame.setSize(1000, 800);
+        mainFrame.setVisible(true);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setResizable(false);
         try {
             gmc = new GameModelController(1000,800);
         } catch (IOException e) {
@@ -197,7 +205,8 @@ public class Controller {
         System.out.println("you choose " + bunnyState + "Bunny, type \"go\" to start the game!");
         String something = input.next();
         if (something.equals("go")) {
-            startGame();
+            //startGame();
+            goGamePanel();
         } else {
             settingForGame();
         }
@@ -300,6 +309,30 @@ public class Controller {
         System.out.println("One cactus is " + meterAway + " meters away");
         String awayGround = String.valueOf(800 - cactus.getPositionY());
         System.out.println("it is " + awayGround + "meters from ground");
+    }
+
+    //EFFECTS: start the game, create game panel and set is as contentpane
+    public void goGamePanel() throws IOException {
+//        JPanel contentPane = new JPanel();
+//        contentPane.add(new FlappyBunnySwing(mainFrame));
+//        mainFrame.setContentPane(contentPane);
+//        JPanel gamePanel = new FlappyBunnySwing(mainFrame);
+//        mainFrame.add(gamePanel);
+//        gamePanel.setFocusable(true);
+//        mainFrame.pack();
+        EventQueue.invokeLater(() -> {
+            JPanel contentPanel = new JPanel();
+            JPanel gamePanel = null;
+            try {
+                gamePanel = new FlappyBunnySwing(mainFrame);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            contentPanel.add(gamePanel);
+            mainFrame.setContentPane(contentPanel);
+            mainFrame.pack();
+
+        });
     }
 
 
