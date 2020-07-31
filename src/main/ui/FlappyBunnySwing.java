@@ -19,10 +19,11 @@ public class FlappyBunnySwing extends JPanel {
     GameModelController gmc;
     Double recordTime;
     Timer timer;
+    Controller controller;
 
-
-    public FlappyBunnySwing(JFrame mainFrame) throws IOException {
+    public FlappyBunnySwing(JFrame mainFrame, Controller controller) throws IOException {
         this.mainFrame = mainFrame;
+        this.controller = controller;
         initial();
         run();
     }
@@ -32,7 +33,7 @@ public class FlappyBunnySwing extends JPanel {
         setPreferredSize(new Dimension(1000,800));
         recordTime = 0.0;
 
-        mainFrame.addKeyListener(new GameEventListener(this));
+        addKeyListener(new GameEventListener(this));
 
         setFocusable(true);
         requestFocusInWindow();
@@ -42,6 +43,8 @@ public class FlappyBunnySwing extends JPanel {
         timer = new Timer(10, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                requestFocusInWindow();
 
                 //update
                 gmc.update(0.01);
@@ -55,7 +58,11 @@ public class FlappyBunnySwing extends JPanel {
                 }
                 if (gmc.isGameOver) {
                     timer.stop();
-
+                    try {
+                        controller.saveGame();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
 
 
@@ -65,8 +72,7 @@ public class FlappyBunnySwing extends JPanel {
 
 
             }
-        }
-        );
+        });
         timer.start();
 
     }
@@ -138,4 +144,7 @@ public class FlappyBunnySwing extends JPanel {
     }
 
 
+    public GameModelController getGameModelController() {
+        return gmc;
+    }
 }

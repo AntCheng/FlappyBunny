@@ -52,13 +52,13 @@ public class Controller {
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setResizable(false);
-        try {
-            gmc = new GameModelController(1000,800);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        bunny = gmc.getBunny();
-        cactusList = gmc.getCactusList();
+//        try {
+//            gmc = new GameModelController(1000,800);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        bunny = gmc.getBunny();
+//        cactusList = gmc.getCactusList();
         loadAccounts();
         playerManager = new PlayerManager(players);
         input = new Scanner(System.in);
@@ -88,7 +88,7 @@ public class Controller {
             }
         }
 
-        System.out.println("\nGoodbye!");
+        //System.out.println("\nGoodbye!");
         // put initial() here to start another round?
     }
 
@@ -212,38 +212,38 @@ public class Controller {
         }
     }
 
-    public void startGame() throws IOException {
-        basicInfo();
-        while (!gmc.isGameOver) {
-            boolean notChoose = true;
-            gmc.update(5.0);
-            gmc.check();
-            print();
-            while (notChoose) {
-                System.out.println("do you want to jump or keep going? j for jump, k for keep going");
-                String move = input.next();
-                if (move.equals("j")) {
-                    System.out.println("jumping!");
-                    gmc.getBunny().burstFly();
-                    notChoose = false;
-                } else if (move.equals("k")) {
-                    System.out.println("keep going!");
-                    notChoose = false;
-                } else {
-                    System.out.println("you do not choose ... ");
-                }
-            }
-        }
-        saveGame();
-    }
+//    public void startGame() throws IOException {
+//        basicInfo();
+//        while (!gmc.isGameOver) {
+//            boolean notChoose = true;
+//            gmc.update(5.0);
+//            gmc.check();
+//            print();
+//            while (notChoose) {
+//                System.out.println("do you want to jump or keep going? j for jump, k for keep going");
+//                String move = input.next();
+//                if (move.equals("j")) {
+//                    System.out.println("jumping!");
+//                    gmc.getBunny().burstFly();
+//                    notChoose = false;
+//                } else if (move.equals("k")) {
+//                    System.out.println("keep going!");
+//                    notChoose = false;
+//                } else {
+//                    System.out.println("you do not choose ... ");
+//                }
+//            }
+//        }
+//        saveGame();
+//    }
 
-    public void basicInfo() {
-        System.out.println();
-        System.out.println("Notice that the bunny is 50 meters tall (I know the game should call gigantic bunny),");
-        System.out.println("so it would always be 50 meters height, the cactus that you should avoid is");
-        System.out.println("60 meters height, the gravity on bunny is 800 and each jump would give the bunny");
-        System.out.println("500 velocity up to the sky, do you calculate to save the \"little\" bunny!");
-    }
+//    public void basicInfo() {
+//        System.out.println();
+//        System.out.println("Notice that the bunny is 50 meters tall (I know the game should call gigantic bunny),");
+//        System.out.println("so it would always be 50 meters height, the cactus that you should avoid is");
+//        System.out.println("60 meters height, the gravity on bunny is 800 and each jump would give the bunny");
+//        System.out.println("500 velocity up to the sky, do you calculate to save the \"little\" bunny!");
+//    }
 
 
 
@@ -261,7 +261,7 @@ public class Controller {
                 try {
                     playerManager.saveRecord(currentRecord, ACCOUNTS_FILE);
                     System.out.println("see you next time");
-                    isGoing = false;
+                    mainFrame.dispose(); //todo: this should be change to activity panel in future
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (UnsupportedEncodingException e) {
@@ -269,7 +269,7 @@ public class Controller {
                 }
             } else {
                 System.out.println("see you next time");
-                isGoing = false;
+                mainFrame.dispose();
             }
         }
     }
@@ -284,32 +284,32 @@ public class Controller {
         }
     }
 
-    public void print() {
-        printBunnySituation();
-        for (Cactus cactus : cactusList) {
-            printCactusSituation(cactus);
-        }
-        if (bunny.getHp() < currentHP) {
-            System.out.println("the bunny get hurt!!!");
-            currentHP = bunny.getHp();
-        }
-    }
-
-    public void printBunnySituation() {
-        System.out.println();
-        System.out.println("Bunny currently has " + bunny.getHp() + "HP");
-        String awayGround = String.valueOf(800 - bunny.getPositionY());
-        System.out.println("the bunny is currently " + awayGround + "meters away from ground");
-        System.out.println("the speed of the bunny is 100 m/s");
-    }
-
-    public void printCactusSituation(Cactus cactus) {
-        System.out.println();
-        String meterAway = String.valueOf(cactus.getPositionX() - 50);
-        System.out.println("One cactus is " + meterAway + " meters away");
-        String awayGround = String.valueOf(800 - cactus.getPositionY());
-        System.out.println("it is " + awayGround + "meters from ground");
-    }
+//    public void print() {
+//        printBunnySituation();
+//        for (Cactus cactus : cactusList) {
+//            printCactusSituation(cactus);
+//        }
+//        if (bunny.getHp() < currentHP) {
+//            System.out.println("the bunny get hurt!!!");
+//            currentHP = bunny.getHp();
+//        }
+//    }
+//
+//    public void printBunnySituation() {
+//        System.out.println();
+//        System.out.println("Bunny currently has " + bunny.getHp() + "HP");
+//        String awayGround = String.valueOf(800 - bunny.getPositionY());
+//        System.out.println("the bunny is currently " + awayGround + "meters away from ground");
+//        System.out.println("the speed of the bunny is 100 m/s");
+//    }
+//
+//    public void printCactusSituation(Cactus cactus) {
+//        System.out.println();
+//        String meterAway = String.valueOf(cactus.getPositionX() - 50);
+//        System.out.println("One cactus is " + meterAway + " meters away");
+//        String awayGround = String.valueOf(800 - cactus.getPositionY());
+//        System.out.println("it is " + awayGround + "meters from ground");
+//    }
 
     //EFFECTS: start the game, create game panel and set is as contentpane
     public void goGamePanel() throws IOException {
@@ -320,11 +320,13 @@ public class Controller {
 //        mainFrame.add(gamePanel);
 //        gamePanel.setFocusable(true);
 //        mainFrame.pack();
+        isGoing = false;
         EventQueue.invokeLater(() -> {
             JPanel contentPanel = new JPanel();
-            JPanel gamePanel = null;
+            FlappyBunnySwing gamePanel = null;
             try {
-                gamePanel = new FlappyBunnySwing(mainFrame);
+                gamePanel = new FlappyBunnySwing(mainFrame, this);
+                gmc = gamePanel.getGameModelController();
             } catch (IOException e) {
                 e.printStackTrace();
             }
