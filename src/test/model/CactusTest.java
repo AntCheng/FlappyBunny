@@ -76,12 +76,12 @@ class CactusTest {
     void updateTest(){
         cactus1.setPositionX(500);
         cactus1.update(1);
-        assertEquals(400,cactus1.getPositionX());
-        assertEquals(100,cactus1.getVelocityX());
+        assertEquals(300,cactus1.getPositionX());
+        assertEquals(200,cactus1.getVelocityX());
 
         cactus1.update(4);
-        assertEquals(0,cactus1.getPositionX());
-        assertEquals(100,cactus1.getVelocityX());
+        assertEquals(-500,cactus1.getPositionX());
+        assertEquals(200,cactus1.getVelocityX());
     }
 
     @Test

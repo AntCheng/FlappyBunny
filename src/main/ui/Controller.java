@@ -46,12 +46,30 @@ public class Controller {
         initial();
     }
 
+    public PlayerManager getPlayerManager() {
+        return playerManager;
+    }
+
     public void initial() {
+
+        loadAccounts();
+        playerManager = new PlayerManager(players);
+        input = new Scanner(System.in);
+
         mainFrame = new JFrame();
-        mainFrame.setSize(1000, 800);
+        //mainFrame.setSize(1000, 800);
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setResizable(false);
+
+        // these code is for login window
+//        LoginPanel loginPanel = new LoginPanel(this);
+//        mainFrame.add(loginPanel);
+//        mainFrame.setContentPane(loginPanel);
+//        mainFrame.pack();
+//        mainFrame.setLocationRelativeTo(null); //this need to be call after pack()
+
+
 //        try {
 //            gmc = new GameModelController(1000,800);
 //        } catch (IOException e) {
@@ -83,6 +101,7 @@ public class Controller {
 
             if (command.equals("q")) {
                 isGoing = false;
+                mainFrame.dispose();
             } else {
                 processCommand(command);
             }
@@ -322,16 +341,17 @@ public class Controller {
 //        mainFrame.pack();
         isGoing = false;
         EventQueue.invokeLater(() -> {
-            JPanel contentPanel = new JPanel();
+//            JPanel contentPanel = new JPanel();
             FlappyBunnySwing gamePanel = null;
             try {
                 gamePanel = new FlappyBunnySwing(mainFrame, this);
-                gmc = gamePanel.getGameModelController();
+                gmc = gamePanel.getGameModelController();  //get gmc here
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            contentPanel.add(gamePanel);
-            mainFrame.setContentPane(contentPanel);
+            //contentPanel.add(gamePanel);
+            mainFrame.add(gamePanel);
+            mainFrame.setContentPane(gamePanel);
             mainFrame.pack();
 
         });
