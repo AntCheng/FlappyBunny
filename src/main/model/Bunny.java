@@ -52,7 +52,7 @@ public class Bunny implements GraphicModel {
         this.positionX = x;
         this.positionY = y;
         this.velocityY = 0;
-        this.gravityOnBunny = 800;
+        this.gravityOnBunny = 500;
         hp = 3;
     }
 

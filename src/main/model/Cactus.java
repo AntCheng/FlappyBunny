@@ -34,7 +34,7 @@ public class Cactus implements GraphicModel {
 //                60, false,false);
         this.positionX = floor.getPositionX() + rand.nextInt((int) (floor.getWidth() - 1));
         this.positionY = floor.getPositionY() - 50;
-        this.velocityX = 100;
+        this.velocityX = 200;
         this.floor = floor;
         this.isTouched = false;
 

@@ -18,7 +18,7 @@ public class GameModelController {
     //private double motionTime, elapsedTime;
     //private AnimationTimer timer;
    // private Long lastNanoTime;
-    private ArrayList<String> codeList;
+    private ArrayList<Integer> codeList;
     private int canvasWidth;
     private int canvasHeight;
     private double pastTime;
@@ -48,7 +48,7 @@ public class GameModelController {
         return bunny;
     }
 
-    public ArrayList<String> getCodeList() {
+    public ArrayList<Integer> getCodeList() {
         return codeList;
     }
 
@@ -68,7 +68,7 @@ public class GameModelController {
         return floorFrequenceTime;
     }
 
-    public ArrayList<Floor> getFloorList() {
+    public List<Floor> getFloorList() {
         return floorList;
     }
 
@@ -136,17 +136,23 @@ public class GameModelController {
 
 
     //effect: do the tings correspond to the Key pressed
-    public void translateKeyEventPressed(String e) {
-        if (e.equals("UP") && !codeList.contains(e)) {
+    public void translateKeyEventPressed(int e) {
+        if (e == 38 && !codeList.contains(e)) {
             codeList.add(e);
             bunny.burstFly();
         }
     }
 
     //effect: do the things correspond to the key released
-    public void translateKeyEventReleased(String e) {
-        if (e.equals("UP") && codeList.contains(e)) {
-            codeList.remove(e);
+    public void translateKeyEventReleased(int e) {
+        if (e == 38 && codeList.contains(e)) {
+            Iterator<Integer> codeIterator = codeList.iterator();
+            while (codeIterator.hasNext()) {
+                Integer i = codeIterator.next();
+                if (i == 38) {
+                    codeIterator.remove();;
+                }
+            }
         }
     }
 

@@ -31,7 +31,7 @@ public class Floor implements GraphicModel {
         Random rand = new Random();
         this.positionX = x;
         this.positionY = bunny.getPositionY() + (-1 + rand.nextInt(3)) * 100;
-        this.velocityX = 100;
+        this.velocityX = 200;
         this.height = 50;
         this.width = 200 + rand.nextInt(300);
         normalFloor = ImageIO.read(floorFile).getScaledInstance((int)width,(int)height,Image.SCALE_SMOOTH);

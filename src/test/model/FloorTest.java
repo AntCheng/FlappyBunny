@@ -57,8 +57,8 @@ class FloorTest {
     void update() {
         floor1.setPositionX(500);
         floor1.update(1);
-        assertEquals(400,floor1.getPositionX());
-        assertEquals(100,floor1.getVelocityX());
+        assertEquals(300,floor1.getPositionX());
+        assertEquals(200,floor1.getVelocityX());
     }
 
     @Test
