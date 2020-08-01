@@ -19,3 +19,6 @@ A *bulleted* list:
 - *As a user, I want to be able show all the player accounts.*
 - *As a user, I want to be able to sort the players according to their records.*
 - *As a user, I want to be able to know my bunny hp, velocity, positions and the obstacles's position during the game.*
+
+- *As a user, I want to be able to save my new account to a file*
+- *As a user, I want to be able to load my players account from a file*
