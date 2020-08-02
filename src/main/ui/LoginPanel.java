@@ -19,12 +19,13 @@ public class LoginPanel extends JPanel {
     private JLabel loginStatus = new JLabel("Incorrect username and password!");
     GridBagLayout loginLayout;
     private GridBagConstraints constraints;
-    private ImageIcon backGround;
     private ImageIcon backgroundImage;
 
 
     private PlayerManager playerManager;
 
+    // LoginPanel class extends JPanel, this panel is for login purpose. Users could login and register to
+    // go to Activity window.
     public LoginPanel(Controller controller) {
         this.controller = controller;
         controller.mainFrame.setTitle("Login Window");
@@ -37,12 +38,15 @@ public class LoginPanel extends JPanel {
         constraints = new GridBagConstraints();
         this.setPreferredSize(new Dimension(400,400));
         backgroundImage = new ImageIcon("src/main/resources/Players/bunny1_hurt.png");
-        setup();
-        addAction();
-
+        setup1();
+        setup2();
+        addLoginAction();
+        addRegisterAction();
     }
 
-    public void setup() {
+    //MODIFIES: this
+    //EFFECT: set up the window, how Labels and button are placed
+    public void setup1() {
 
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -68,6 +72,12 @@ public class LoginPanel extends JPanel {
         constraints.fill = GridBagConstraints.HORIZONTAL;
         add(userPassWordField,constraints);
 
+
+    }
+
+    //MODIFIES: this
+    //EFFECT: set up the window, how Labels and button are placed
+    public void setup2() {
         constraints.gridx = 0;
         constraints.gridy = 2;
         add(loginButton,constraints);
@@ -79,10 +89,12 @@ public class LoginPanel extends JPanel {
         constraints.gridx = 0;
         constraints.gridy = 3;
         add(loginStatus,constraints);
-
     }
 
-    public void addAction() {
+    //MODIFIES: this
+    //EFFECT: give login button an actionListener, which let him login an account if that the userName
+    // and passWord is correct in the file. If Login successful, it will go to activity window.
+    public void addLoginAction() {
 
         loginButton.addActionListener(new ActionListener() {
 
@@ -96,23 +108,47 @@ public class LoginPanel extends JPanel {
                     System.out.println("Login account is " + usernameInput);
                     System.out.println();
                     System.out.println();
-//                  go to next panel;
+                    controller.gotoActivity();
                 } else {
+                    loginStatus.setText("Incorrect username and password!");
                     loginStatus.setVisible(true);
                 }
             }
         });
 
+
+    }
+
+    //MODIFIES: this
+    //EFFECT: give register button an actionListener, which let him register an account if that username
+    // haven't been used. If register successful, it will go to activity window.
+    public void addRegisterAction() {
         registerButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //todo: go to register panel, (similar to this one)
+                String usernameInput = userTextField.getText();;
+                String passwordInput = userPassWordField.getText();;
+
+
+                if (playerManager.creatAccount(usernameInput,passwordInput)) {
+                    System.out.println("Register successful!!");
+                    System.out.println("The new account is " + usernameInput);
+                    System.out.println();
+                    System.out.println();
+                    controller.gotoActivity();
+                } else {
+                    loginStatus.setText("This username already exist");
+                    loginStatus.setVisible(true);
+
+                }
             }
         });
     }
 
     @Override
+    //MODIFIES: this
+    //EFFECT: draw some picture in the background
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage.getImage(),0,0,300,300,null);

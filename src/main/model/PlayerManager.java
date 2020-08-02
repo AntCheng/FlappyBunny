@@ -27,6 +27,18 @@ public class PlayerManager {
         return currentPlayer;
     }
 
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    //MODIFIES: this
+    //EFFECTS: set currentPlayer to null
+    public void setCurrentPlayerNull() {
+        this.currentPlayer = null;
+    }
+
+
     //MODIFIES: this
     //EFFECTS: create an new player account if the account username is not register.
     // the new account would be set to currentPlayer, return true if create account successful,false otherwise.

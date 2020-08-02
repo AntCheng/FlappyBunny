@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Scanner;
 
 
-//ATTRIBUTE: some structure of this class is inspired from tellerAPP
-// TellerAPP source: https://github.students.cs.ubc.ca/CPSC210/TellerApp
 public class Controller {
 
     private static final String ACCOUNTS_FILE = "./data/players";
@@ -42,6 +40,8 @@ public class Controller {
 
 
 
+    // The controller class is used mainly for control which window to use, it start by setting up a login&register
+    // window.
     public Controller() {
         initial();
     }
@@ -50,6 +50,12 @@ public class Controller {
         return playerManager;
     }
 
+    public String getAccountsFile() {
+        return ACCOUNTS_FILE;
+    }
+
+    //MODIFIES: this
+    //EFFECTS: Initialize all the variables and setup a login window to start this application.
     public void initial() {
 
         loadAccounts();
@@ -62,83 +68,122 @@ public class Controller {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setResizable(false);
 
-        // these code is for login window
-//        LoginPanel loginPanel = new LoginPanel(this);
-//        mainFrame.add(loginPanel);
-//        mainFrame.setContentPane(loginPanel);
-//        mainFrame.pack();
-//        mainFrame.setLocationRelativeTo(null); //this need to be call after pack()
 
-
-//        try {
-//            gmc = new GameModelController(1000,800);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        bunny = gmc.getBunny();
-//        cactusList = gmc.getCactusList();
         loadAccounts();
         playerManager = new PlayerManager(players);
         input = new Scanner(System.in);
 
+        gotoLogin();
+
+//        try {
+//            runGame();
+//        } catch (IOException e) {
+//            System.out.println("can't find the image files");
+//            e.printStackTrace();
+//        }
+    }
+
+    //MODIFIES: this
+    //EFFECTS: Load all acounts from the file
+    public void loadAccounts() {
         try {
-            runGame();
+            players = PlayerReader.readAccounts(new File(ACCOUNTS_FILE));
         } catch (IOException e) {
-            System.out.println("can't find the image files");
-            e.printStackTrace();
+            System.out.println("there is no account");
         }
     }
 
+    //MODIFIES: this
+    //EFFECT: set current player in playerManager to null. Go to login window.
+    public void gotoLogin() {
+        playerManager.setCurrentPlayerNull();
+        LoginPanel loginPanel = new LoginPanel(this);
+        mainFrame.add(loginPanel);
+        mainFrame.setContentPane(loginPanel);
+        mainFrame.pack();
+        mainFrame.setLocationRelativeTo(null); //this need to be call after pack()
+    }
 
-    public void runGame() throws IOException {
-        isGoing = true;
-        String command = null;
+    //MODIFIES: this
+    //EFFECT: go to Activity window.
+    public void gotoActivity() {
+        ActivityPanel activityPanel = new ActivityPanel(this);
+        mainFrame.add(activityPanel);
+        mainFrame.setContentPane(activityPanel);
+        mainFrame.pack();
+        mainFrame.setLocationRelativeTo(null);
+    }
 
-        while (isGoing) {
-            displayMenu();
-            command = input.next();
-            command = command.toLowerCase();
+    //MODIFIES: this
+    //EFFECT: go to game window, which will start the game.
+    public void goGamePanel() throws IOException {
 
-            if (command.equals("q")) {
-                isGoing = false;
-                mainFrame.dispose();
-            } else {
-                processCommand(command);
+        isGoing = false;
+        EventQueue.invokeLater(() -> {
+            FlappyBunnySwing gamePanel = null;
+            try {
+                gamePanel = new FlappyBunnySwing(mainFrame, this);
+                gmc = gamePanel.getGameModelController();  //get gmc here
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        }
+            mainFrame.add(gamePanel);
+            mainFrame.setContentPane(gamePanel);
+            mainFrame.pack();
+            mainFrame.setLocationRelativeTo(null);
 
-        //System.out.println("\nGoodbye!");
-        // put initial() here to start another round?
+        });
     }
 
-    public void displayMenu() {
-        System.out.println("\nSelect from:");
-        System.out.println("\tl -> login");
-        System.out.println("\tr -> register");
-        System.out.println("\tv -> view account");
-        System.out.println("\tq -> quit");
-    }
+//    public void runGame() throws IOException {
+//        isGoing = true;
+//        String command = null;
+//
+//        while (isGoing) {
+//            displayMenu();
+//            command = input.next();
+//            command = command.toLowerCase();
+//
+//            if (command.equals("q")) {
+//                isGoing = false;
+//                mainFrame.dispose();
+//            } else {
+//                processCommand(command);
+//            }
+//        }
+//
+//        //System.out.println("\nGoodbye!");
+//        // put initial() here to start another round?
+//    }
 
-    // MODIFIES: this
-    // EFFECTS: processes user command
-    private void processCommand(String command) throws IOException {
-        if (command.equals("l")) {
-            login();
-        } else if (command.equals("r")) {
-            register();
-        } else if (command.equals("v")) {
-            viewPlayers();
-        } else {
-            System.out.println("Selection not valid...");
-        }
-    }
+//    public void displayMenu() {
+//        System.out.println("\nSelect from:");
+//        System.out.println("\tl -> login");
+//        System.out.println("\tr -> register");
+//        System.out.println("\tv -> view account");
+//        System.out.println("\tq -> quit");
+//    }
+//
+//    // MODIFIES: this
+//    // EFFECTS: processes user command
+//    private void processCommand(String command) throws IOException {
+//        if (command.equals("l")) {
+//            login();
+//        } else if (command.equals("r")) {
+//            register();
+//        } else if (command.equals("v")) {
+//            viewPlayers();
+//        } else {
+//            System.out.println("Selection not valid...");
+//        }
+//    }
 
-    public void viewPlayers() {
-        playerManager.sortPlayers();
-        for (Player player : players) {
-            System.out.println(player.toString());
-        }
-    }
+//    public void viewPlayers() {
+//        playerManager.sortPlayers();
+//        for (Player player : players) {
+//            System.out.println(player.toString());
+//        }
+//    }
 
 //    //MODIFIES: this
 //    //EFFECTS: Asking the user to login or register, will run again if the use does not choose
@@ -159,77 +204,77 @@ public class Controller {
     //MODIFIES: this
     //EFFECTS: register the user, set the user as current player.will run again if the use does not choose
     // the register username must not be already in the file
-    public void register() throws IOException {
-        String usernameInput;
-        String passwordInput;
-
-        System.out.println("Please type your username: ");
-        usernameInput = input.next();
-        System.out.println("Please type your password: ");
-        passwordInput = input.next();
-
-        if (playerManager.creatAccount(usernameInput,passwordInput)) {
-            System.out.println("Register successful!!");
-            System.out.println("The new account is " + usernameInput);
-            System.out.println();
-            System.out.println();
-            settingForGame();
-        } else {
-            System.out.println("Please try again");
-            register();
-        }
-    }
+//    public void register() throws IOException {
+//        String usernameInput;
+//        String passwordInput;
+//
+//        System.out.println("Please type your username: ");
+//        usernameInput = input.next();
+//        System.out.println("Please type your password: ");
+//        passwordInput = input.next();
+//
+//        if (playerManager.creatAccount(usernameInput,passwordInput)) {
+//            System.out.println("Register successful!!");
+//            System.out.println("The new account is " + usernameInput);
+//            System.out.println();
+//            System.out.println();
+//            settingForGame();
+//        } else {
+//            System.out.println("Please try again");
+//            register();
+//        }
+//    }
 
     //MODIFIES: this
     //EFFECTS: ask to login, user has to provide username and password that match in the file
-    public void login() throws IOException {
-        String usernameInput;
-        String passwordInput;
-
-        System.out.println("Please type your username: ");
-        usernameInput = input.next();
-        System.out.println("Please type your password: ");
-        passwordInput = input.next();
-        if (playerManager.matchUserAndPassword(usernameInput,passwordInput)) {
-            System.out.println("Logging successful!!");
-            System.out.println("Login account is " + usernameInput);
-            System.out.println();
-            System.out.println();
-            settingForGame();
-        } else {
-            System.out.println("incorrect username and password, please try again");
-            login();
-        }
-    }
+//    public void login() throws IOException {
+//        String usernameInput;
+//        String passwordInput;
+//
+//        System.out.println("Please type your username: ");
+//        usernameInput = input.next();
+//        System.out.println("Please type your password: ");
+//        passwordInput = input.next();
+//        if (playerManager.matchUserAndPassword(usernameInput,passwordInput)) {
+//            System.out.println("Logging successful!!");
+//            System.out.println("Login account is " + usernameInput);
+//            System.out.println();
+//            System.out.println();
+//            settingForGame();
+//        } else {
+//            System.out.println("incorrect username and password, please try again");
+//            login();
+//        }
+//    }
 
     //MODIFIES: this
     //EFFECTS: setting up the game, ready to start the game
-    public void settingForGame() throws IOException {
-        boolean ischoose = true;
-        System.out.println("Hi there!");
-        System.out.println("Welcome to the FlappyBunny, this is the fun game you would like to play");
-        System.out.println("Do you lke brown bunny or purple bunny, type \"purple\" or \"brown\" ");
-        while (ischoose) {
-            String inputState = input.next();
-            if (inputState.equals("purple")) {
-                bunnyState = "purple";
-                ischoose = false;
-            } else if (inputState.equals("brown")) {
-                bunnyState = "Brown";
-                ischoose = false;
-            } else {
-                System.out.println("These is no such options, please choose again");
-            }
-        }
-        System.out.println("you choose " + bunnyState + "Bunny, type \"go\" to start the game!");
-        String something = input.next();
-        if (something.equals("go")) {
-            //startGame();
-            goGamePanel();
-        } else {
-            settingForGame();
-        }
-    }
+//    public void settingForGame() throws IOException {
+//        boolean ischoose = true;
+//        System.out.println("Hi there!");
+//        System.out.println("Welcome to the FlappyBunny, this is the fun game you would like to play");
+//        System.out.println("Do you lke brown bunny or purple bunny, type \"purple\" or \"brown\" ");
+//        while (ischoose) {
+//            String inputState = input.next();
+//            if (inputState.equals("purple")) {
+//                bunnyState = "purple";
+//                ischoose = false;
+//            } else if (inputState.equals("brown")) {
+//                bunnyState = "Brown";
+//                ischoose = false;
+//            } else {
+//                System.out.println("These is no such options, please choose again");
+//            }
+//        }
+//        System.out.println("you choose " + bunnyState + "Bunny, type \"go\" to start the game!");
+//        String something = input.next();
+//        if (something.equals("go")) {
+//            //startGame();
+//            goGamePanel();
+//        } else {
+//            settingForGame();
+//        }
+//    }
 
 //    public void startGame() throws IOException {
 //        basicInfo();
@@ -268,40 +313,34 @@ public class Controller {
 
     //MODIFIES:this
     //EFFECT: save the current information for the reader, write into the file ACCOUNTS_FILE
-    public void saveGame() throws IOException {
-        System.out.println("Your bunny died....");
-        if (gmc.isGameOver) {
-            Double currentRecord = gmc.getPastTime();
-            System.out.println("but you play great!!!");
-            System.out.println("Do you want to save your record? ");
-            System.out.println("your current record is" + currentRecord + ", yes or no");
-            String saveornot = input.next();
-            if (saveornot.equals("yes")) {
-                try {
-                    playerManager.saveRecord(currentRecord, ACCOUNTS_FILE);
-                    System.out.println("see you next time");
-                    mainFrame.dispose(); //todo: this should be change to activity panel in future
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                System.out.println("see you next time");
-                mainFrame.dispose();
-            }
-        }
-    }
+//    public void saveGame() throws IOException {
+//        System.out.println("Your bunny died....");
+//        if (gmc.isGameOver) {
+//            Double currentRecord = gmc.getPastTime();
+//            System.out.println("but you play great!!!");
+//            System.out.println("Do you want to save your record? ");
+//            System.out.println("your current record is" + currentRecord + ", yes or no");
+//            String saveornot = input.next();
+//            if (saveornot.equals("yes")) {
+//                try {
+//                    playerManager.saveRecord(currentRecord, ACCOUNTS_FILE);
+//                    System.out.println("see you next time");
+//                    mainFrame.dispose();
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                } catch (UnsupportedEncodingException e) {
+//                    e.printStackTrace();
+//                }
+//            } else {
+//                System.out.println("see you next time");
+//                mainFrame.dispose();
+//            }
+//        }
+//    }
 
-    //MODIFIES: this
-    //EFFECTS: Load all acounts from the file
-    public void loadAccounts() {
-        try {
-            players = PlayerReader.readAccounts(new File(ACCOUNTS_FILE));
-        } catch (IOException e) {
-            System.out.println("there is no account");
-        }
-    }
+
+
+
 
 //    public void print() {
 //        printBunnySituation();
@@ -331,31 +370,7 @@ public class Controller {
 //    }
 
     //EFFECTS: start the game, create game panel and set is as contentpane
-    public void goGamePanel() throws IOException {
-//        JPanel contentPane = new JPanel();
-//        contentPane.add(new FlappyBunnySwing(mainFrame));
-//        mainFrame.setContentPane(contentPane);
-//        JPanel gamePanel = new FlappyBunnySwing(mainFrame);
-//        mainFrame.add(gamePanel);
-//        gamePanel.setFocusable(true);
-//        mainFrame.pack();
-        isGoing = false;
-        EventQueue.invokeLater(() -> {
-//            JPanel contentPanel = new JPanel();
-            FlappyBunnySwing gamePanel = null;
-            try {
-                gamePanel = new FlappyBunnySwing(mainFrame, this);
-                gmc = gamePanel.getGameModelController();  //get gmc here
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            //contentPanel.add(gamePanel);
-            mainFrame.add(gamePanel);
-            mainFrame.setContentPane(gamePanel);
-            mainFrame.pack();
 
-        });
-    }
 
 
 
