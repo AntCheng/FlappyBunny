@@ -2,8 +2,8 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import system.PlayerReader;
-import system.PlayerWriter;
+import persistence.PlayerReader;
+import persistence.PlayerWriter;
 
 import java.io.File;
 import java.io.FileNotFoundException;

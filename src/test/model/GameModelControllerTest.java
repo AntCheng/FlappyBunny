@@ -69,39 +69,45 @@ class GameModelControllerTest {
 
     }
 
-//    @Test
-//    void translateKeyEventPressedTest() {
-//        gmc.translateKeyEventPressed("UP");
-//        assertEquals("UP",gmc.getCodeList().get(0));
-//        assertEquals(-500,bunny.getVelocityY());
-//
-//        gmc.translateKeyEventPressed("UP");
-//        assertEquals("UP",gmc.getCodeList().get(0));
-//        assertEquals(-500,bunny.getVelocityY());
-//
-//        gmc.translateKeyEventPressed("lol");
-//        assertEquals(1,gmc.getCodeList().size());
-//        assertEquals(-500,bunny.getVelocityY());
-//    }
-//
-//    @Test
-//    void translateKeyEventReleasedTest() {
-//        //contain UP, releaseUP
-//        gmc.translateKeyEventPressed("UP");
-//        gmc.translateKeyEventReleased("UP");
-//        assertEquals(0,gmc.getCodeList().size());
-//        assertEquals(-500,bunny.getVelocityY());
-//
-//        gmc.translateKeyEventReleased("UP");
-//        assertEquals(0,gmc.getCodeList().size());
-//        assertEquals(-500,bunny.getVelocityY());
-//
-//        //contain UP, release Down
-//        gmc.getCodeList().add("UP");
-//        gmc.translateKeyEventReleased("DOWN");
-//        assertEquals(1,gmc.getCodeList().size());
-//        assertEquals(-500,bunny.getVelocityY());
-//    }
+    @Test
+    void translateKeyEventPressedForUpTest() {
+        gmc.translateKeyEventPressed(38);
+        assertEquals(38,gmc.getCodeList().get(0));
+        assertEquals(-500,bunny.getVelocityY());
+
+        gmc.translateKeyEventPressed(38);
+        assertEquals(38,gmc.getCodeList().get(0));
+        assertEquals(-500,bunny.getVelocityY());
+
+        gmc.translateKeyEventPressed(10);
+        assertEquals(1,gmc.getCodeList().size());
+        assertEquals(-500,bunny.getVelocityY());
+    }
+
+    @Test
+    void translateKeyEventReleasedForUpTest() {
+        //contain UP, releaseUP
+        gmc.translateKeyEventPressed(38);
+        gmc.translateKeyEventReleased(38);
+        assertEquals(0,gmc.getCodeList().size());
+        assertEquals(-500,bunny.getVelocityY());
+
+        gmc.translateKeyEventReleased(38);
+        assertEquals(0,gmc.getCodeList().size());
+        assertEquals(-500,bunny.getVelocityY());
+
+        gmc.getCodeList().add(32);
+        gmc.translateKeyEventPressed(38);
+        gmc.translateKeyEventReleased(38);
+        assertEquals(1,gmc.getCodeList().size());
+        assertEquals(-500,bunny.getVelocityY());
+
+        //contain UP, release Down
+        gmc.getCodeList().add(38);
+        gmc.translateKeyEventReleased(32);
+        assertEquals(2,gmc.getCodeList().size());
+        assertEquals(-500,bunny.getVelocityY());
+    }
 
     @Test
     void updateCactusListTest() {
@@ -109,8 +115,8 @@ class GameModelControllerTest {
         cactus2.setPositionX(400);
         gmc.updateCactusList(1.0);
 
-        assertEquals(200,cactus1.getPositionX());
-        assertEquals(300,cactus2.getPositionX());
+        assertEquals(100,cactus1.getPositionX());
+        assertEquals(200,cactus2.getPositionX());
     }
 
     @Test
@@ -119,8 +125,8 @@ class GameModelControllerTest {
         floor2.setPositionX(400);
         gmc.updateFloorList(1.0);
 
-        assertEquals(200,floor1.getPositionX());
-        assertEquals(300,floor2.getPositionX());
+        assertEquals(100,floor1.getPositionX());
+        assertEquals(200,floor2.getPositionX());
     }
 
     @Test

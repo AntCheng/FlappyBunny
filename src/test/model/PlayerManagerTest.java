@@ -2,7 +2,7 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import system.PlayerReader;
+import persistence.PlayerReader;
 
 import java.io.*;
 import java.util.List;
@@ -97,5 +97,28 @@ class PlayerManagerTest {
         assertEquals(player3,players.get(0));
         assertEquals(player1,players.get(1));
         assertEquals(player2,players.get(2));
+    }
+
+    @Test
+    void getPlayersTest() {
+        Player player1 = new Player("test1","user1",2.0);
+        Player player2 = new Player("test2","pass2",1.0);
+        Player player3 = new Player("test3","pass3",3.0);
+
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+
+        assertEquals(players, playerManager.getPlayers());
+
+    }
+
+    @Test
+    void setCurrentPlayerNullTest() {
+
+        playerManager.creatAccount("test1","pass1");
+        playerManager.setCurrentPlayerNull();
+        assertEquals(null, playerManager.getCurrentPlayer());
+
     }
 }

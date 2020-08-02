@@ -1,11 +1,10 @@
 package model;
 
-import system.PlayerWriter;
+import persistence.PlayerWriter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -26,6 +25,18 @@ public class PlayerManager {
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
+
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    //MODIFIES: this
+    //EFFECTS: set currentPlayer to null
+    public void setCurrentPlayerNull() {
+        this.currentPlayer = null;
+    }
+
 
     //MODIFIES: this
     //EFFECTS: create an new player account if the account username is not register.
