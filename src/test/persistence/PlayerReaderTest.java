@@ -1,4 +1,4 @@
-package system;
+package persistence;
 
 import model.Player;
 import org.junit.jupiter.api.Test;

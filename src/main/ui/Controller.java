@@ -2,14 +2,12 @@ package ui;
 
 
 import model.*;
-import system.PlayerReader;
+import persistence.PlayerReader;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

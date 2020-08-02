@@ -1,11 +1,10 @@
 package model;
 
-import system.PlayerWriter;
+import persistence.PlayerWriter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;

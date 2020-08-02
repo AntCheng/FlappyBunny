@@ -2,7 +2,7 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import system.PlayerReader;
+import persistence.PlayerReader;
 
 import java.io.*;
 import java.util.List;
