@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
+//The floor class in this game, which would floating on the game and may carry bunny, cactus and other things
 public class Floor implements GraphicModel {
 
     public static final int BASIC_FLOOR =    0;
@@ -26,7 +27,8 @@ public class Floor implements GraphicModel {
     private double velocityY;
     private double gravityOnFloor;
 
-    //The floor class in this game, which would floating on the game and may carry bunny, cactus and other things
+    //EFFECTS: initialize the floor object in this game,
+    // and initialize the velocity, position and other status of this floor.
     public Floor(int x, int y, Bunny bunny, int type) throws IOException {
         Random rand = new Random();
         this.positionX = x;

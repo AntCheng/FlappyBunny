@@ -17,7 +17,7 @@ public class PlayerManager {
     private Player currentPlayer;
 
 
-
+    //EFFECTS: initialize the playerManger, the given players would be the players it manage.
     public PlayerManager(List<Player> players) {
         this.players = players;
     }

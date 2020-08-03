@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+//class FlappyBunnySwing extends JPanel and it is the game window that the user would see. it shows all graphic game
+// model to the users and detect users interaction.
 public class FlappyBunnySwing extends JPanel {
     JFrame mainFrame;
     GameModelController gmc;
@@ -78,6 +80,9 @@ public class FlappyBunnySwing extends JPanel {
     }
 
 
+    public GameModelController getGameModelController() {
+        return gmc;
+    }
 
 
     @Override
@@ -178,7 +183,7 @@ public class FlappyBunnySwing extends JPanel {
 
         constraints.gridx = 0;
         constraints.gridy = 2;
-        //constraints.fill = GridBagConstraints.NONE;
+        constraints.fill = GridBagConstraints.NONE;
         constraints.weightx = 0.5;
         constraints.weighty = 0.5;
         savePanel.add(yesButton,constraints);
@@ -187,6 +192,7 @@ public class FlappyBunnySwing extends JPanel {
         constraints.gridy = 2;
         constraints.weightx = 0.5;
         constraints.weightx = 0.5;
+        constraints.fill = GridBagConstraints.NONE;
         savePanel.add(noButton,constraints);
     }
 
@@ -230,8 +236,4 @@ public class FlappyBunnySwing extends JPanel {
         });
     }
 
-
-    public GameModelController getGameModelController() {
-        return gmc;
-    }
 }

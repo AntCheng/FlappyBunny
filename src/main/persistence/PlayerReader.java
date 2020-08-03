@@ -12,6 +12,7 @@ import java.util.List;
 
 //ATTRIBUTES: The model of this class comes from the Reader class in TellerAPP
 // TellerAPP source: https://github.students.cs.ubc.ca/CPSC210/TellerApp
+// PlayerReader is for reading file.
 public class PlayerReader {
 
 

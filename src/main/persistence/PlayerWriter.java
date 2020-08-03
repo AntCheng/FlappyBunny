@@ -9,6 +9,7 @@ import java.io.UnsupportedEncodingException;
 
 //ATTRIBUTES: the model of this class comes form the Writer class in TellerAPP
 // TellerAPP source: https://github.students.cs.ubc.ca/CPSC210/TellerApp
+// PlayerWriter is for writing players data into file
 public class PlayerWriter {
     private PrintWriter printWriter;
 

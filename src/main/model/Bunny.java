@@ -1,9 +1,5 @@
 package model;
 
-
-
-
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -33,7 +29,7 @@ public class Bunny implements GraphicModel {
     private File fileWalk1;
     private File fileWalk2;
 
-    //effect: instantiate a bunny object
+    //effect: instantiate a bunny object and initialize the velocity, position and other status of this bunny
     public Bunny(int x, int y) throws IOException {
 
         fileWalk1 = new File("src/main/resources/Players/bunny1_walk1.png");

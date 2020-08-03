@@ -12,27 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
+//class controller, it serves to control the windows that the users would see, such as the login window, game window
+// and others. Controller control which window users could see.
 public class Controller {
 
     private static final String ACCOUNTS_FILE = "./data/players";
 
-    String usernameC = "username";
-    String passwordC = "pass";
-    String bunnyState;
-    boolean isrun;
+
     private PlayerManager playerManager;
     private List<Player> players;
     GameModelController gmc;
-    Bunny bunny;
-    ArrayList<Cactus> cactusList;
-    Double gameTime = 0.0;
-    int currentHP = 3;
+
     boolean isGoing;
 
     JFrame mainFrame;
 
-    FlappyBunny flappyBunny;
 
     private Scanner input;
 

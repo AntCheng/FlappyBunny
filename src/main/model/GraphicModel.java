@@ -2,6 +2,7 @@ package model;
 
 import java.awt.geom.Rectangle2D;
 
+//GraphicModel in this game, it is the sprite class.
 public interface GraphicModel {
 
     //update this graphical mode; as time changes

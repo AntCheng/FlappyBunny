@@ -8,22 +8,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
+//class GameModelController in this game, it serves to control the graphic model in this game.
 public class GameModelController {
 
     public Bunny bunny;
     public ArrayList<Floor> floorList;
     public ArrayList<Cactus> cactusList;
     public Boolean isGameOver;
-    //private double motionTime, elapsedTime;
-    //private AnimationTimer timer;
-   // private Long lastNanoTime;
     private ArrayList<Integer> codeList;
     private int canvasWidth;
     private int canvasHeight;
     private double pastTime;
     private double floorFrequenceTime;
 
+    //EFFECTS: initialize the GameModelController of this game, it would initialize all graphical model object
+    // in the game.
     public GameModelController(int x, int y) throws IOException {
         bunny = new Bunny(50, 750);
         floorList = new ArrayList<Floor>();

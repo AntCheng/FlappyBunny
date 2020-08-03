@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+//The activityPanel extends JPanel, it is the window after users sign in, it is also
+// the window where user could choose to play the game, view the players or logout
 public class ActivityPanel extends JPanel {
 
     Controller controller;
@@ -21,6 +23,7 @@ public class ActivityPanel extends JPanel {
     GridBagLayout activityLayout;
     private GridBagConstraints constraints;
 
+    //EFFECT: Initialize a activity class, it would set up the activity window for the user.
     public ActivityPanel(Controller controller) {
         this.controller = controller;
         this.playerManager = controller.getPlayerManager();

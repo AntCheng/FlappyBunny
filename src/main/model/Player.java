@@ -2,6 +2,7 @@ package model;
 
 import java.io.PrintWriter;
 
+//class player is the player account of the game, it record the user's username, password and best records.
 public class Player {
     String username;
     String password;
@@ -30,7 +31,6 @@ public class Player {
     }
 
     //EFFECTS: return the string of this account
-    //todo: test have not made
     public String toString() {
         return "Username: " + username + "  Record: " + record.toString();
     }

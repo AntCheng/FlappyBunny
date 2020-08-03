@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
+//class cactus represent the obstacles that would hurt the bunny, it stays on the floor
 public class Cactus implements GraphicModel {
 
     private int width;
@@ -22,12 +23,11 @@ public class Cactus implements GraphicModel {
     private boolean isTouched;
     private File cactusFile = new File("src/main/resources/cactus.png");
 
-    //Class cactus would appear on the floor, it serves to obstacle bunny, if bunny get touch to them, bunny would hurt
+    //EFFECT: initialize a cactus object and initialize the velocity, position and other status of this cactus.
     public Cactus(Floor floor) throws IOException {
         Random rand = new Random();
         this.width = 60;
         this.height = 60;
-
         this.cactusImage = ImageIO.read(cactusFile).getScaledInstance(width,height,Image.SCALE_SMOOTH);
 
 //        this.cactusImage = new Image("cactus.png", 60,

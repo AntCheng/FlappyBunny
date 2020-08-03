@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//class LoginPanel extends JPanel, which is the Login and Register window that user would see
 public class LoginPanel extends JPanel {
 
     private Controller controller;
@@ -24,8 +25,7 @@ public class LoginPanel extends JPanel {
 
     private PlayerManager playerManager;
 
-    // LoginPanel class extends JPanel, this panel is for login purpose. Users could login and register to
-    // go to Activity window.
+    //EFFECT: initialize a LoginPanel object, it set up the login or register window for users.
     public LoginPanel(Controller controller) {
         this.controller = controller;
         controller.mainFrame.setTitle("Login Window");
