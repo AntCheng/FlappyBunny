@@ -81,7 +81,7 @@ public class Cactus implements GraphicModel {
     }
 
 
-
+    //EFFECT: return true if the cactus is out, false otherwise
     public boolean isOut() {
         if (positionX + width < 0) {
             return true;

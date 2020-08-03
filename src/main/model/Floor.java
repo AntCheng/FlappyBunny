@@ -28,7 +28,7 @@ public class Floor implements GraphicModel {
     private double gravityOnFloor;
 
     //EFFECTS: initialize the floor object in this game,
-    // and initialize the velocity, position and other status of this floor.
+    // and initialize the velocity, position and other status of this floor
     public Floor(int x, int y, Bunny bunny, int type) throws IOException {
         Random rand = new Random();
         this.positionX = x;
@@ -75,6 +75,7 @@ public class Floor implements GraphicModel {
         this.positionX = positionX;
     }
 
+    //EFFECT: return true if the floor is out, false otherwise
     public boolean isOut() {
         if (positionX + width < 0) {
             return true;
