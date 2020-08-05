@@ -91,7 +91,7 @@ public class Cactus implements GraphicModel {
 
     @Override
     public void update(double time) {
-        this.positionX -= velocityX * time;
+        this.positionX -= floor.getVelocityX() * time;
     }
 
     @Override

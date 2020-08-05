@@ -136,14 +136,17 @@ public class GameModelController {
 
     //effect: do the tings correspond to the Key pressed
     public void translateKeyEventPressed(int e) {
+        //case up
         if (e == 38 && !codeList.contains(e)) {
             codeList.add(e);
             bunny.burstFly();
         }
+        //case right
     }
 
     //effect: do the things correspond to the key released
     public void translateKeyEventReleased(int e) {
+        //case up
         if (e == 38 && codeList.contains(e)) {
             Iterator<Integer> codeIterator = codeList.iterator();
             while (codeIterator.hasNext()) {
@@ -153,6 +156,7 @@ public class GameModelController {
                 }
             }
         }
+        //case right
     }
 
     //modifies: this

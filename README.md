@@ -22,3 +22,13 @@ A *bulleted* list:
 
 - *As a user, I want to be able to save my new account to a file*
 - *As a user, I want to be able to load my players account from a file*
+
+### instruction for grader:
+
+- *You can generate the first required event by clicking the login button (assume you have the right username and password)*
+- *You can generate the second required event by clicking the register button (the username can't be already registered)*
+- *You can locate my visual component by when you run the application, and more could be seen when you play the game.*
+- *You can save the state of my application by clicking yes button when the game is end and asking if you want to save your game record.*
+- *You can reload the state of my application by clicking view button when you login/register successful. (viewing all accounts)*
+
+
