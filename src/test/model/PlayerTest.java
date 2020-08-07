@@ -86,7 +86,7 @@ class PlayerTest {
 
     @Test
     void toStringtest(){
-        String player0String = "Username: " + "user" + "  Record: " + 0.0;
+        String player0String = "Username: " + "user" + "  Record: " + String.format("%.2f", 0.00);
         assertEquals(player0String,player0.toString());
     }
 

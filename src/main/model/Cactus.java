@@ -37,7 +37,6 @@ public class Cactus implements GraphicModel {
         this.velocityX = 200;
         this.floor = floor;
         this.isTouched = false;
-
     }
 
     public Image getImage() {

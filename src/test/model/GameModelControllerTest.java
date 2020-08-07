@@ -20,7 +20,7 @@ class GameModelControllerTest {
     private Cactus cactus1;
     private Cactus cactus2;
     private List<Cactus> cactusList;
-    //private JFXPanel jfxPanel = new JFXPanel();
+    private List<FloatingEnemy> alienList;
 
     @BeforeEach
     void runBefore(){
@@ -41,6 +41,7 @@ class GameModelControllerTest {
         cactusList = gmc.getCactusList();
         cactusList.add(cactus1);
         cactusList.add(cactus2);
+        alienList = gmc.getFloatingEnemy();
     }
 
     @Test
@@ -51,6 +52,7 @@ class GameModelControllerTest {
         assertEquals(false,gmc.isGameOver);
         assertEquals(0,gmc.getFloorFrequenceTime());
         assertEquals(0,gmc.getPastTime());
+        assertEquals(0,gmc.getFloatingEnemy().size());
     }
 
 
@@ -65,18 +67,18 @@ class GameModelControllerTest {
 
         assertEquals(1,gmc.getPastTime());
         assertEquals(1,gmc.getFloorFrequenceTime());
+        assertEquals(1,gmc.getFloatingAlienFrequenceTime());
         assertEquals(750, bunny.getPositionY());
-
     }
 
     @Test
     void translateKeyEventPressedForUpTest() {
-        gmc.translateKeyEventPressed(38);
-        assertEquals(38,gmc.getCodeList().get(0));
+        gmc.translateKeyEventPressed(87);
+        assertEquals(87,gmc.getCodeList().get(0));
         assertEquals(-500,bunny.getVelocityY());
 
-        gmc.translateKeyEventPressed(38);
-        assertEquals(38,gmc.getCodeList().get(0));
+        gmc.translateKeyEventPressed(87);
+        assertEquals(87,gmc.getCodeList().get(0));
         assertEquals(-500,bunny.getVelocityY());
 
         gmc.translateKeyEventPressed(10);
@@ -85,27 +87,43 @@ class GameModelControllerTest {
     }
 
     @Test
+    void translateKeyEventPressedForLeftAndRightTest() {
+        gmc.translateKeyEventPressed(65);
+        assertEquals(true,bunny.getIsMoveLeft());
+        gmc.translateKeyEventPressed(68);
+        assertEquals(true,bunny.getIsMoveRight());
+    }
+
+    @Test
+    void translateKeyEventReleasedForLeftAndRightTest() {
+        gmc.translateKeyEventReleased(65);
+        assertEquals(false,bunny.getIsMoveLeft());
+        gmc.translateKeyEventReleased(68);
+        assertEquals(false,bunny.getIsMoveRight());
+    }
+
+    @Test
     void translateKeyEventReleasedForUpTest() {
         //contain UP, releaseUP
-        gmc.translateKeyEventPressed(38);
-        gmc.translateKeyEventReleased(38);
+        gmc.translateKeyEventPressed(87);
+        gmc.translateKeyEventReleased(87);
         assertEquals(0,gmc.getCodeList().size());
         assertEquals(-500,bunny.getVelocityY());
 
-        gmc.translateKeyEventReleased(38);
+        gmc.translateKeyEventReleased(87);
         assertEquals(0,gmc.getCodeList().size());
         assertEquals(-500,bunny.getVelocityY());
 
         gmc.getCodeList().add(32);
-        gmc.translateKeyEventPressed(38);
-        gmc.translateKeyEventReleased(38);
+        gmc.translateKeyEventPressed(87);
+        gmc.translateKeyEventReleased(87);
         assertEquals(1,gmc.getCodeList().size());
         assertEquals(-500,bunny.getVelocityY());
 
         //contain UP, release Down
-        gmc.getCodeList().add(38);
-        gmc.translateKeyEventReleased(32);
-        assertEquals(2,gmc.getCodeList().size());
+        gmc.getCodeList().add(87);
+        gmc.translateKeyEventReleased(87);
+        assertEquals(1,gmc.getCodeList().size());
         assertEquals(-500,bunny.getVelocityY());
     }
 
@@ -194,4 +212,32 @@ class GameModelControllerTest {
         assertEquals(false,bunny.getOnFloor());
 
     }
+
+    @Test
+    void checkFloatingAlienTest() throws IOException {
+        gmc.setFloatingAlienFrequenceTime(9.0);
+        gmc.checkFloatingAlien();
+        assertEquals(0.0,gmc.getFloatingAlienFrequenceTime());
+        assertEquals(1,alienList.size());
+        //assertEquals(true,bunny.hasChanged());
+        assertEquals(1,bunny.countObservers());
+        //assertEquals(); check notifyAllObservers
+
+        alienList.get(0).setPositionY(-200);
+        gmc.checkFloatingAlien();
+        assertEquals(0,alienList.size());
+        assertEquals(0,bunny.countObservers());
+    }
+
+    @Test
+    void updateFloatingAlienListTest() throws IOException {
+        FloatingEnemy alien = new FloatingEnemy();
+        alienList.add(alien);
+        alien.setState(FloatingEnemy.State.FLYINGIN);
+        alien.update(bunny,null);
+        gmc.updateFloatingAlienList(1.0);
+        assertEquals(1000 - alien.getVelocityX(), alien.getPositionX());
+    }
+
+
 }

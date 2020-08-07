@@ -153,6 +153,19 @@ class BunnyTest {
         assertEquals(0,bunny.getVelocityY());
         assertEquals(0,bunny.getPositionY());
         assertEquals(800,bunny.getGravityOnBunny());
+
+        bunny.setIsMoveLeft(true);
+        bunny.setPositionY(750);
+        bunny.update(1.0);
+        assertEquals(50 - bunny.getVelocityX() * 1, bunny.getPositionX());
+
+        bunny.setIsMoveLeft(false);
+        bunny.setIsMoveRight(true);
+        bunny.setPositionY(750);
+        bunny.setPositionX(50);
+        bunny.update(1.0);
+        assertEquals(50 + bunny.getVelocityX() * 1, bunny.getPositionX());
+
     }
 
     @Test
@@ -199,6 +212,26 @@ class BunnyTest {
     public void setHPTest() {
         bunny.setHp(1);
         assertEquals(1,bunny.getHp());
+    }
+
+    @Test
+    public void setMoveRightandLeftTest() {
+        bunny.setIsMoveLeft(true);
+        assertEquals(bunny.getIsMoveLeft(), true);
+        bunny.setIsMoveRight(true);
+        assertEquals(bunny.getIsMoveRight(),true);
+    }
+
+    @Test
+    public void getHurtTest() {
+        bunny.getHurt();
+        assertEquals(2,bunny.getHp());
+    }
+
+    @Test
+    public void changedTest() {
+        bunny.changed();
+        assertEquals(true,bunny.hasChanged());
     }
 
 //    @Test

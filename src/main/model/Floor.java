@@ -32,7 +32,7 @@ public class Floor implements GraphicModel {
     public Floor(int x, int y, Bunny bunny, int type) throws IOException {
         Random rand = new Random();
         this.positionX = x;
-        this.positionY = bunny.getPositionY() + (-1 + rand.nextInt(3)) * 100;
+        this.positionY = adjust(bunny.getPositionY() + (-1 + rand.nextInt(3)) * 100);
         this.velocityX = 200;
         this.height = 50;
         this.width = 200 + rand.nextInt(300);
@@ -42,6 +42,14 @@ public class Floor implements GraphicModel {
 //                this.height,false,false);
     }
 
+    //EFFECT: adjust the floor position so that it won't appear underground
+    //todo:test
+    public static double adjust(double positionY) {
+        if (positionY > 940) {
+            return 940;
+        }
+        return positionY;
+    }
 
     public double getPositionX() {
         return this.positionX;
