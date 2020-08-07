@@ -245,7 +245,9 @@ public class FlappyBunnySwing extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controller.getPlayerManager().saveRecord(0.0, controller.getAccountsFile());
+                    controller.getPlayerManager().saveRecord(
+                            controller.getPlayerManager().getCurrentPlayer().getRecord(),
+                            controller.getAccountsFile());
                 } catch (FileNotFoundException ex) {
                     ex.printStackTrace();
                 } catch (UnsupportedEncodingException ex) {
