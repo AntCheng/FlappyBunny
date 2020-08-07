@@ -246,6 +246,7 @@ public class GameModelController {
         checkFloorListOut();
         checkCactusListOUt();
         checkFloatingAlien();
+
     }
 
 

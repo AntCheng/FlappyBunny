@@ -164,7 +164,8 @@ public class Bunny extends Observable implements GraphicModel {
         return hp;
     }
 
-    //todo:test
+    //MODIFIES: this
+    //EFFECT: this bunny setchange.
     public void changed() {
         this.setChanged();
     }
