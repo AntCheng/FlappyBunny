@@ -94,6 +94,7 @@ public class Controller {
         mainFrame.setContentPane(loginPanel);
         mainFrame.pack();
         mainFrame.setLocationRelativeTo(null); //this need to be call after pack()
+        loginPanel.requestFocusInWindow();
     }
 
     //MODIFIES: this

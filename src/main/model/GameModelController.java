@@ -16,10 +16,12 @@ public class GameModelController {
     public ArrayList<Cactus> cactusList;
     public Boolean isGameOver;
     private ArrayList<Integer> codeList;
+    private ArrayList<FloatingEnemy> alienList;
     private int canvasWidth;
     private int canvasHeight;
     private double pastTime;
     private double floorFrequenceTime;
+    private double floatingAlienFrequenceTime;
 
     //EFFECTS: initialize the GameModelController of this game, it would initialize all graphical model object
     // in the game.
@@ -28,6 +30,7 @@ public class GameModelController {
         floorList = new ArrayList<Floor>();
         codeList = new ArrayList<>();
         cactusList = new ArrayList<Cactus>();
+        alienList = new ArrayList<>();
         this.canvasWidth = x;
         this.canvasHeight = y;
         setup();
@@ -38,8 +41,10 @@ public class GameModelController {
     public void setup() {
         floorList.clear();
         cactusList.clear();
+        alienList.clear();
         isGameOver = false;
         pastTime = 0;
+        floorFrequenceTime = 0;
         floorFrequenceTime = 0;
     }
 
@@ -75,17 +80,55 @@ public class GameModelController {
         return cactusList;
     }
 
+    public List<FloatingEnemy> getFloatingEnemy() {
+        return alienList;
+    }
+
+    public double getFloatingAlienFrequenceTime() {
+        return floatingAlienFrequenceTime;
+    }
+
+    public void setFloatingAlienFrequenceTime(double floatingAlienFrequenceTime) {
+        this.floatingAlienFrequenceTime = floatingAlienFrequenceTime;
+    }
+
     //MODIFIES: this
     //effect: update all graphic model in the after elapsedTime, add the elapsedTime to the pastTime
-    // and floorFrequenceTime
+    // and floorFrequenceTime, floatingAlienFrequenceTime.
     public void update(Double elapsedTime) {
         bunny.update(elapsedTime);
         updateCactusList(elapsedTime);
         updateFloorList(elapsedTime);
+        updateFloatingAlienList(elapsedTime);
 
         pastTime += elapsedTime;
         floorFrequenceTime += elapsedTime;
+        floatingAlienFrequenceTime += elapsedTime;
+    }
 
+    public void checkFloatingAlien() throws IOException {
+        if (floatingAlienFrequenceTime > 8) {
+            floatingAlienFrequenceTime = 0.0;
+            FloatingEnemy alien = new FloatingEnemy();
+            alienList.add(alien);
+            bunny.addObserver(alien);
+            bunny.changed();
+            bunny.notifyObservers();
+        }
+        Iterator<FloatingEnemy> alienListIterator = alienList.iterator();
+        while (alienListIterator.hasNext()) {
+            FloatingEnemy alien = alienListIterator.next();
+            if (alien.isOut()) {
+                alienListIterator.remove();
+                bunny.deleteObserver(alien);
+            }
+        }
+    }
+
+    public void updateFloatingAlienList(double time) {
+        for (FloatingEnemy alien : alienList) {
+            alien.update(time);
+        }
     }
 
     //MODIFIES: this
@@ -121,7 +164,7 @@ public class GameModelController {
     }
 
     //MODIFIES: this
-    //EFFECTS check if the cactus in the list is out, if so, removr them
+    //EFFECTS check if the cactus in the list is out, if so, remove them
     public void checkCactusListOUt() {
         Iterator<Cactus> cactusIterator = cactusList.iterator();
         while (cactusIterator.hasNext()) {
@@ -137,26 +180,40 @@ public class GameModelController {
     //effect: do the tings correspond to the Key pressed
     public void translateKeyEventPressed(int e) {
         //case up
-        if (e == 38 && !codeList.contains(e)) {
+        if (e == 87 && !codeList.contains(e)) {
             codeList.add(e);
             bunny.burstFly();
         }
         //case right
+        if (e == 68) {
+            bunny.setIsMoveRight(true);
+        }
+        if (e == 65) {
+            bunny.setIsMoveLeft(true);
+        }
+        //case left
     }
 
     //effect: do the things correspond to the key released
     public void translateKeyEventReleased(int e) {
         //case up
-        if (e == 38 && codeList.contains(e)) {
+        if (e == 87 && codeList.contains(e)) {
             Iterator<Integer> codeIterator = codeList.iterator();
             while (codeIterator.hasNext()) {
                 Integer i = codeIterator.next();
-                if (i == 38) {
+                if (i == 87) {
                     codeIterator.remove();;
                 }
             }
         }
         //case right
+        if (e == 68) {
+            bunny.setIsMoveRight(false);
+        }
+        //case left
+        if (e == 65) {
+            bunny.setIsMoveLeft(false);
+        }
     }
 
     //modifies: this
@@ -180,6 +237,7 @@ public class GameModelController {
     // check if bunny touch any cactus
     // check if generate new floor and cactus
     // check if any floor is out
+    // check the alien states
     public void check() throws IOException {
         checkHP();
         bunny.checkStandFloor(floorList);
@@ -187,6 +245,7 @@ public class GameModelController {
         checkFloorCactusSize();
         checkFloorListOut();
         checkCactusListOUt();
+        checkFloatingAlien();
     }
 
 

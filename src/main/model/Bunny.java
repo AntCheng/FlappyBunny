@@ -6,13 +6,18 @@ import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 //class Bunny, player would control the instantiation of this object, which is a bunny to play this game.
-public class Bunny implements GraphicModel {
+public class Bunny extends Observable implements GraphicModel {
 
     private double width = 50;
     private double height = 50;
     private double gravityOnBunny = 800;
+
+    private boolean isMoveRight = false;
+    private boolean isMoveLeft = false;
 
 
     private Image walk1;
@@ -20,7 +25,7 @@ public class Bunny implements GraphicModel {
     private double walkStateTime;
     private double positionX;
     private double positionY;
-    private double velocityX;
+    private double velocityX = 100;
     private double velocityY;
 
     private boolean walkState = true;
@@ -74,6 +79,26 @@ public class Bunny implements GraphicModel {
 //    }
 
 
+    public double getVelocityX() {
+        return velocityX;
+    }
+
+    public void setIsMoveRight(boolean b) {
+        isMoveRight = b;
+    }
+
+
+    public void setIsMoveLeft(boolean b) {
+        isMoveLeft = b;
+    }
+
+    public boolean getIsMoveRight() {
+        return isMoveRight;
+    }
+
+    public boolean getIsMoveLeft() {
+        return isMoveLeft;
+    }
 
     public boolean getWalkState() {
         return walkState;
@@ -137,6 +162,11 @@ public class Bunny implements GraphicModel {
 
     public int getHp() {
         return hp;
+    }
+
+    //todo:test
+    public void changed() {
+        this.setChanged();
     }
 
 
@@ -239,6 +269,12 @@ public class Bunny implements GraphicModel {
             gravityOnBunny = 0;
         }
         this.positionY = positionY + velocityY * time;
+        if (isMoveRight) {
+            positionX += velocityX * time;
+        }
+        if (isMoveLeft) {
+            positionX -= velocityX * time;
+        }
 
 
     }
@@ -255,6 +291,11 @@ public class Bunny implements GraphicModel {
     }
 
 
+    //MODIFIES:this
+    //EFFECT: hp minus one;
+    public void getHurt() {
+        hp--;
+    }
 
 
 
@@ -270,4 +311,6 @@ public class Bunny implements GraphicModel {
     public boolean intersects(GraphicModel g) {
         return g.getBoundary().intersects(this.getBoundary());
     }
+
+
 }

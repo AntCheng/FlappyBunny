@@ -102,7 +102,7 @@ public class FlappyBunnySwing extends JPanel {
         drawFloor(gmc.getFloorList(),g);
         drawCactus(gmc.getCactusList(),g);
         drawMetersAndHP(g);
-
+        drawFloatingAlien(gmc.getFloatingEnemy(),g);
         //Toolkit.getDefaultToolkit().sync(); //not sure how it actually work, but it would help display image?
     }
 
@@ -127,6 +127,27 @@ public class FlappyBunnySwing extends JPanel {
             g.drawImage(cactus.getImage(), (int)cactus.getPositionX(), (int)cactus.getPositionY(),this);
         }
     }
+
+    //MODIFIES: this
+    //EFFECT: the draw method for the alien in the game
+    public void drawFloatingAlien(List<FloatingEnemy> alienList, Graphics g) {
+        for (FloatingEnemy alien : alienList) {
+            g.drawImage(alien.getAlienImage(), (int)alien.getPositionX(), (int)alien.getPositionY(),this);
+            if (alien.isShooting()) {
+                g.drawImage(alien.getAlienShootingImage1(), (int)alien.getPositionX(),
+                        (int)alien.getPositionY() + 30,this);
+
+                if (!alien.isShootingDelay()) {
+                    g.drawImage(alien.getAlienShootingImage2(), (int)alien.getPositionX() + 15,
+                            (int) (alien.getPositionY() + alien.getHeight()),this);
+                    g.drawImage(alien.getAlienShootingImage3(), (int) alien.getPositionX() - 15,
+                            750,this);
+                }
+            }
+
+        }
+    }
+
 
     //MODIFIES: this
     //EFFECTS: drawHP and the current meters of the game controller canvas
