@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 //class GameModelController in this game, it serves to control the graphic model in this game.
 public class GameModelController {
@@ -22,6 +23,8 @@ public class GameModelController {
     private double pastTime;
     private double floorFrequenceTime;
     private double floatingAlienFrequenceTime;
+    private int gameDifficulty;
+    Random random = new Random();
 
     //EFFECTS: initialize the GameModelController of this game, it would initialize all graphical model object
     // in the game.
@@ -46,6 +49,7 @@ public class GameModelController {
         pastTime = 0;
         floorFrequenceTime = 0;
         floorFrequenceTime = 0;
+        gameDifficulty = 1;
     }
 
     public Bunny getBunny() {
@@ -100,20 +104,36 @@ public class GameModelController {
         updateCactusList(elapsedTime);
         updateFloorList(elapsedTime);
         updateFloatingAlienList(elapsedTime);
+        updateGameDifficulty();
 
         pastTime += elapsedTime;
         floorFrequenceTime += elapsedTime;
         floatingAlienFrequenceTime += elapsedTime;
     }
 
+    //MODIFIES: this
+    //EFFECT: update the current game difficulty
+    //todo: test
+    public void updateGameDifficulty() {
+        gameDifficulty = (int)(pastTime / 30) + 1;
+    }
+
+
+    //MODIFIES: this
+    //EFFECT: check if a new alien need to be made and if any alien fly out of the scene.
     public void checkFloatingAlien() throws IOException {
+        for (int i = 0; i < gameDifficulty; i++) {
+            if (floatingAlienFrequenceTime > 8) {
+                double positionX = 1000 + random.nextInt(500);
+                FloatingEnemy alien = new FloatingEnemy(positionX, 100);
+                alienList.add(alien);
+                bunny.addObserver(alien);
+                bunny.changed();
+                bunny.notifyObservers();
+            }
+        }
         if (floatingAlienFrequenceTime > 8) {
-            floatingAlienFrequenceTime = 0.0;
-            FloatingEnemy alien = new FloatingEnemy();
-            alienList.add(alien);
-            bunny.addObserver(alien);
-            bunny.changed();
-            bunny.notifyObservers();
+            floatingAlienFrequenceTime = 0;
         }
         Iterator<FloatingEnemy> alienListIterator = alienList.iterator();
         while (alienListIterator.hasNext()) {
@@ -125,6 +145,8 @@ public class GameModelController {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: update each alien
     public void updateFloatingAlienList(double time) {
         for (FloatingEnemy alien : alienList) {
             alien.update(time);

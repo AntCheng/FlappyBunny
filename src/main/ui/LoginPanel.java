@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 
 //class LoginPanel extends JPanel, which is the Login and Register window that user would see
 public class LoginPanel extends JPanel {
@@ -135,7 +137,13 @@ public class LoginPanel extends JPanel {
                     System.out.println("Register successful!!");
                     System.out.println("The new account is " + usernameInput);
                     System.out.println();
-                    System.out.println();
+                    try {
+                        playerManager.saveRecord(0.0,controller.getAccountsFile());
+                    } catch (FileNotFoundException ex) {
+                        ex.printStackTrace();
+                    } catch (UnsupportedEncodingException ex) {
+                        ex.printStackTrace();
+                    }
                     controller.gotoActivity();
                 } else {
                     loginStatus.setText("This username already exist");

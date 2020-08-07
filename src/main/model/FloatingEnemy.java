@@ -63,6 +63,12 @@ public class FloatingEnemy implements Observer, GraphicModel {
 
     }
 
+    public FloatingEnemy(double positionX, double positionY) throws IOException {
+        this();
+        this.setPositionX(positionX);
+        this.setPositionY(positionY);
+    }
+
     public Image getAlienImage() {
         return alienImage;
     }
@@ -96,7 +102,7 @@ public class FloatingEnemy implements Observer, GraphicModel {
     }
 
     public boolean isShootingDelay() {
-        return (delayTimeForShooting > 0 && delayTimeForShooting < 1);
+        return (delayTimeForShooting >= 0 && delayTimeForShooting < 1);
     }
 
     public double getHeight() {

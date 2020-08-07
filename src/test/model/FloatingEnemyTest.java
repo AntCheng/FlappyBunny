@@ -10,6 +10,7 @@ import java.util.List;
 
 import static model.FloatingEnemy.State.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class FloatingEnemyTest {
 
@@ -32,7 +33,7 @@ public class FloatingEnemyTest {
     }
 
     @Test
-    void constructerTest() {
+    void constructorTest() {
         assertEquals(60,alien.getHeight());
         assertEquals(100,alien.getVelocityX());
         assertEquals(60,alien.getAlienImage().getHeight(null));
@@ -42,6 +43,17 @@ public class FloatingEnemyTest {
         assertEquals(60,alien.getAlienShootingImage3().getHeight(null));
         assertEquals(1000,alien.getPositionX());
         assertEquals(100,alien.getPositionY());
+    }
+
+    @Test
+    void constructorTest2() {
+        try {
+            alien = new FloatingEnemy(200,200);
+        } catch (IOException e) {
+            fail();
+        }
+        assertEquals(200,alien.getPositionX());
+        assertEquals(200,alien.getPositionY());
     }
 
     @Test

@@ -148,12 +148,11 @@ public class FlappyBunnySwing extends JPanel {
         }
     }
 
-
     //MODIFIES: this
     //EFFECTS: drawHP and the current meters of the game controller canvas
     public void drawMetersAndHP(Graphics g) {
-        String time = recordTime.toString();
-        g.drawString(time + " meters",950,50);
+        String time = String.format("%.2f", recordTime);
+        g.drawString(time + " meters",900,50);
         g.drawString("HP " + String.valueOf(gmc.getBunny().getHp()), 10,50);
     }
 
@@ -168,7 +167,8 @@ public class FlappyBunnySwing extends JPanel {
         JButton yesButton = new JButton("Yes");
         JButton noButton = new JButton("no");
         JLabel dieStatement = new JLabel("Your bunny died ...");
-        JLabel saveStatement = new JLabel("Do you want to save your game? your record is " + recordTime);
+        JLabel saveStatement = new JLabel("Do you want to save your game? your record is "
+                + String.format("%.2f", recordTime));
 
         savePanel.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();

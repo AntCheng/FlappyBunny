@@ -32,7 +32,7 @@ public class Player {
 
     //EFFECTS: return the string of this account
     public String toString() {
-        return "Username: " + username + "  Record: " + record.toString();
+        return "Username: " + username + "  Record: " + String.format("%.2f", record);
     }
 
     //EFFECTS: Save this player information to the file open by printWriter
@@ -42,7 +42,7 @@ public class Player {
         printWriter.print(",");
         printWriter.print(password);
         printWriter.print(",");
-        printWriter.print(record);
+        printWriter.print(String.format("%.2f", record));
         printWriter.println();
     }
 }
