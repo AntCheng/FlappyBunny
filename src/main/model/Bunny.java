@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
 
 //class Bunny, player would control the instantiation of this object, which is a bunny to play this game.
 public class Bunny extends Observable implements GraphicModel {
@@ -20,8 +19,6 @@ public class Bunny extends Observable implements GraphicModel {
     private boolean isMoveLeft = false;
 
 
-    private Image walk1;
-    private Image walk2;
     private double walkStateTime;
     private double positionX;
     private double positionY;
@@ -31,18 +28,28 @@ public class Bunny extends Observable implements GraphicModel {
     private boolean walkState = true;
     private boolean onFloor = false;
     private int hp;
+
+    private Image walk1;
+    private Image walk2;
+    private Image hurtImage;
     private File fileWalk1;
     private File fileWalk2;
+    private File hurtFile;
+
+    private boolean isHurting;
+    private double timeForHurt = 0;
 
     //effect: instantiate a bunny object and initialize the velocity, position and other status of this bunny
     public Bunny(int x, int y) throws IOException {
 
         fileWalk1 = new File("src/main/resources/Players/bunny1_walk1.png");
         fileWalk2 = new File("src/main/resources/Players/bunny1_walk2.png");
+        hurtFile = new File("src/main/resources/Players/bunny1_hurt.png");
 
 
         walk1 = ImageIO.read(fileWalk1).getScaledInstance((int)width,(int)height,Image.SCALE_SMOOTH);
         walk2 = ImageIO.read(fileWalk2).getScaledInstance((int)width,(int)height,Image.SCALE_SMOOTH);
+        hurtImage = ImageIO.read(hurtFile).getScaledInstance((int)width,(int)height,Image.SCALE_SMOOTH);
 
 
 //        walk1 = new Image("/Players/bunny1_walk1.png",50,50,
@@ -124,6 +131,14 @@ public class Bunny extends Observable implements GraphicModel {
         this.positionY = positionY;
     }
 
+    public boolean getIsHurting() {
+        return isHurting;
+    }
+
+    public Image getHurtImage() {
+        return hurtImage;
+    }
+
 //    public double getVelocityX() {
 //        return velocityX;
 //    }
@@ -170,6 +185,19 @@ public class Bunny extends Observable implements GraphicModel {
         this.setChanged();
     }
 
+    //MODIFIES: this
+    //EFFECTS: give the image that this bunny state should give
+    public Image getImage(double time) {
+        timeForHurt += time;
+        if (isHurting && timeForHurt < 6) {
+            return hurtImage;
+        }
+        if (timeForHurt > 6) {
+            timeForHurt = 0;
+            isHurting = false;
+        }
+        return getWalkImage(time);
+    }
 
     //effect: return the walk image, changing between two image state;
     public Image getWalkImage(Double time) {
@@ -285,7 +313,7 @@ public class Bunny extends Observable implements GraphicModel {
     public void checkTouchCactus(List<Cactus> cactusList) {
         for (Cactus cactus : cactusList) {
             if (intersects(cactus) && !cactus.getIsTounched()) {
-                hp--;
+                getHurt();
                 cactus.setIsTouched(true);
             }
         }
@@ -295,6 +323,7 @@ public class Bunny extends Observable implements GraphicModel {
     //MODIFIES:this
     //EFFECT: hp minus one;
     public void getHurt() {
+        isHurting = true;
         hp--;
     }
 

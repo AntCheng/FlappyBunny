@@ -120,7 +120,7 @@ public class GameModelController {
 
 
     //MODIFIES: this
-    //EFFECT: check if a new alien need to be made and if any alien fly out of the scene.
+    //EFFECT: check if a new alien need to be made.
     public void checkFloatingAlien() throws IOException {
         for (int i = 0; i < gameDifficulty; i++) {
             if (floatingAlienFrequenceTime > 8) {
@@ -135,6 +135,12 @@ public class GameModelController {
         if (floatingAlienFrequenceTime > 8) {
             floatingAlienFrequenceTime = 0;
         }
+
+    }
+
+    //MODIFIES: this
+    //EFFECTS: check if any alien fly out of the scene.
+    public void checkAlienOut() {
         Iterator<FloatingEnemy> alienListIterator = alienList.iterator();
         while (alienListIterator.hasNext()) {
             FloatingEnemy alien = alienListIterator.next();
@@ -268,6 +274,7 @@ public class GameModelController {
         checkFloorListOut();
         checkCactusListOUt();
         checkFloatingAlien();
+        checkAlienOut();
 
     }
 

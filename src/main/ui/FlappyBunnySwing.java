@@ -2,6 +2,7 @@ package ui;
 
 import model.*;
 
+import javax.sound.sampled.LineUnavailableException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -37,7 +38,11 @@ public class FlappyBunnySwing extends JPanel {
         setPreferredSize(new Dimension(1000,800));
         recordTime = 0.0;
 
-        soundEffect = new SoundEffect();
+        try {
+            soundEffect = new SoundEffect();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
 
         addKeyListener(new GameEventListener(this));
 
@@ -73,6 +78,8 @@ public class FlappyBunnySwing extends JPanel {
                     soundEffect.stop();
                 }
 
+                //play music
+                getMusic();
 
                 //draw
                 //this seems would call the paintComponent method)
@@ -114,8 +121,9 @@ public class FlappyBunnySwing extends JPanel {
 
     //MODIFIES: this
     //EFFECT: the overall draw method
+    //todo: test
     public void drawBunny(Bunny bunny, Double time, Graphics g) {
-        g.drawImage(bunny.getWalkImage(time), (int)bunny.getPositionX(), (int)bunny.getPositionY(), this);
+        g.drawImage(bunny.getImage(time), (int)bunny.getPositionX(), (int)bunny.getPositionY(), this);
     }
 
     //MODIFIES: this
@@ -161,6 +169,15 @@ public class FlappyBunnySwing extends JPanel {
         g.drawString(time + " meters",900,50);
         g.drawString("HP " + String.valueOf(gmc.getBunny().getHp()), 10,50);
     }
+
+    //EFFECTS: play the sound effect
+    public void getMusic() {
+        if (gmc.getBunny().getIsHurting()) {
+            soundEffect.playBunnyHurt();
+        }
+    }
+
+
 
     //MODIFIES: this
     //EFFECTS: pops up a new window asking if the user want to save their game record or not

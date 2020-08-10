@@ -50,7 +50,11 @@ public class LoginPanel extends JPanel {
         addLoginAction();
         addRegisterAction();
         AudioInputStream audioInputStream = null;
-        soundEffect = new SoundEffect();
+        try {
+            soundEffect = new SoundEffect();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
 //        audioSetup();
     }
 

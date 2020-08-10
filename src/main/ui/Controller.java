@@ -22,7 +22,7 @@ public class Controller {
 
     private PlayerManager playerManager;
     private List<Player> players;
-    GameModelController gmc;
+
 
     boolean isGoing;
 
@@ -111,7 +111,7 @@ public class Controller {
             FlappyBunnySwing gamePanel = null;
             try {
                 gamePanel = new FlappyBunnySwing(mainFrame, this);
-                gmc = gamePanel.getGameModelController();  //get gmc here
+//                gmc = gamePanel.getGameModelController();  //get gmc here
             } catch (IOException e) {
                 e.printStackTrace();
             }

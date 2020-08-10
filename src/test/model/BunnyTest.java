@@ -234,6 +234,22 @@ class BunnyTest {
         assertEquals(true,bunny.hasChanged());
     }
 
+    @Test
+    void getImageTest() {
+
+        assertEquals(bunny.getWalk1(),bunny.getImage(1.0));
+
+        bunny.getHurt();
+        assertEquals(true,bunny.getIsHurting());
+        assertEquals(bunny.getHurtImage(),bunny.getImage(1.0));
+        bunny.getImage(5.0);
+        bunny.getImage(1.0);
+        assertEquals(false, bunny.getIsHurting());
+
+
+
+    }
+
 //    @Test
 //    void testIOException(){
 //        bunny.se
