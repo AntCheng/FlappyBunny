@@ -38,6 +38,9 @@ public class PlayerReader {
 //        }
 
         for (String line : fileContent) {
+            if (line.isEmpty()) {
+                continue;
+            }
             ArrayList<String> lineComponents = splitString(line);
             players.add(parsePlayers(lineComponents));
         }

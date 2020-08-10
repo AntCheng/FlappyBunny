@@ -15,6 +15,7 @@ public class ActivityPanel extends JPanel {
 
     Controller controller;
     PlayerManager playerManager;
+    SoundEffect soundEffect;
 
     JButton playButton = new JButton("Play");
     JButton viewButton = new JButton("View Players");
@@ -31,6 +32,7 @@ public class ActivityPanel extends JPanel {
         this.setLayout(activityLayout);
         this.setPreferredSize(new Dimension(400,400));
         constraints = new GridBagConstraints();
+        soundEffect = new SoundEffect();
         setup();
         addPlayAction();
         addViewAction();
@@ -58,6 +60,7 @@ public class ActivityPanel extends JPanel {
         playButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                soundEffect.playButtonSound();
                 try {
                     controller.goGamePanel();
                 } catch (IOException ex) {
@@ -71,6 +74,7 @@ public class ActivityPanel extends JPanel {
         viewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                soundEffect.playButtonSound();
                 JFrame viewFrame = new JFrame();
                 viewFrame.setVisible(true);
                 //viewFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,6 +99,7 @@ public class ActivityPanel extends JPanel {
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                soundEffect.playButtonSound();
                 controller.gotoLogin();
             }
         });

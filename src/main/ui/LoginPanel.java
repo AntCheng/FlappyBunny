@@ -2,11 +2,14 @@ package ui;
 
 import model.PlayerManager;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 //class LoginPanel extends JPanel, which is the Login and Register window that user would see
@@ -23,6 +26,8 @@ public class LoginPanel extends JPanel {
     GridBagLayout loginLayout;
     private GridBagConstraints constraints;
     private ImageIcon backgroundImage;
+    private SoundEffect soundEffect;
+
 
 
     private PlayerManager playerManager;
@@ -33,7 +38,7 @@ public class LoginPanel extends JPanel {
         controller.mainFrame.setTitle("Login Window");
         loginLayout = new GridBagLayout();
         playerManager = controller.getPlayerManager();
-        //backGround = new ImageIcon("src/main/resources/Players/bunny1_hurt.png");
+
         loginStatus.setVisible(false);
         //loginStatus.setFont();
         this.setLayout(loginLayout);
@@ -44,7 +49,27 @@ public class LoginPanel extends JPanel {
         setup2();
         addLoginAction();
         addRegisterAction();
+        AudioInputStream audioInputStream = null;
+        soundEffect = new SoundEffect();
+//        audioSetup();
     }
+
+//    public void audioSetup() {
+//        try {
+//            clip = AudioSystem.getClip();
+//            audioInputStream = AudioSystem.getAudioInputStream(
+//                    new File("src/main/resources/Sound/smw_stomp.wav").getAbsoluteFile());
+//            clip.open(audioInputStream);
+//
+//
+//        } catch (UnsupportedAudioFileException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (LineUnavailableException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     //MODIFIES: this
     //EFFECT: set up the window, how Labels and button are placed
@@ -105,6 +130,7 @@ public class LoginPanel extends JPanel {
                 String usernameInput = userTextField.getText();
                 String passwordInput = userPassWordField.getText();
                 System.out.println("click");
+                soundEffect.playButtonSound();
                 if (playerManager.matchUserAndPassword(usernameInput,passwordInput)) {
                     System.out.println("Logging successful!!");
                     System.out.println("Login account is " + usernameInput);
@@ -129,14 +155,12 @@ public class LoginPanel extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                String usernameInput = userTextField.getText();;
-                String passwordInput = userPassWordField.getText();;
-
-
-                if (playerManager.creatAccount(usernameInput,passwordInput)) {
+                String usernameInput = userTextField.getText();
+                String passwordInput = userPassWordField.getText();
+                soundEffect.playButtonSound();
+                if (!usernameInput.isEmpty() && playerManager.creatAccount(usernameInput,passwordInput)) {
                     System.out.println("Register successful!!");
-                    System.out.println("The new account is " + usernameInput);
-                    System.out.println();
+
                     try {
                         playerManager.saveRecord(0.0,controller.getAccountsFile());
                     } catch (FileNotFoundException ex) {

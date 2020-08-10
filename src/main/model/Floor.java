@@ -45,8 +45,8 @@ public class Floor implements GraphicModel {
     //EFFECT: adjust the floor position so that it won't appear underground
     //todo:test
     public static double adjust(double positionY) {
-        if (positionY > 940) {
-            return 940;
+        if (positionY > 740) {
+            return 740;
         }
         return positionY;
     }

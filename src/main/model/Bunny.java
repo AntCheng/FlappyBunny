@@ -165,7 +165,7 @@ public class Bunny extends Observable implements GraphicModel {
     }
 
     //MODIFIES: this
-    //EFFECT: this bunny setchange.
+    //EFFECT: this bunny has changed.
     public void changed() {
         this.setChanged();
     }

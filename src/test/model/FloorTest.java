@@ -78,10 +78,10 @@ class FloorTest {
 
     @Test
     void adjustTest() {
-        floor1.setPositionY(800);
-        assertEquals(800,floor1.adjust(floor1.getPositionY()));
+        floor1.setPositionY(500);
+        assertEquals(500,floor1.adjust(floor1.getPositionY()));
         floor1.setPositionY(1100);
         floor1.setPositionY(floor1.adjust(floor1.getPositionY()));
-        assertEquals(940,floor1.getPositionY());
+        assertEquals(740,floor1.getPositionY());
     }
 }

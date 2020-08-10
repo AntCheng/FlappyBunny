@@ -4,6 +4,7 @@ package ui;
 import model.*;
 import persistence.PlayerReader;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -28,7 +29,6 @@ public class Controller {
     JFrame mainFrame;
 
 
-    private Scanner input;
 
 
 
@@ -52,7 +52,7 @@ public class Controller {
 
         loadAccounts();
         playerManager = new PlayerManager(players);
-        input = new Scanner(System.in);
+
 
         mainFrame = new JFrame();
         //mainFrame.setSize(1000, 800);
@@ -63,16 +63,11 @@ public class Controller {
 
         loadAccounts();
         playerManager = new PlayerManager(players);
-        input = new Scanner(System.in);
+
+
 
         gotoLogin();
 
-//        try {
-//            runGame();
-//        } catch (IOException e) {
-//            System.out.println("can't find the image files");
-//            e.printStackTrace();
-//        }
     }
 
     //MODIFIES: this
@@ -127,6 +122,8 @@ public class Controller {
 
         });
     }
+
+
 
 //    public void runGame() throws IOException {
 //        isGoing = true;

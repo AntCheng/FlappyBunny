@@ -19,6 +19,7 @@ public class FlappyBunnySwing extends JPanel {
     Double recordTime;
     Timer timer;
     Controller controller;
+    SoundEffect soundEffect;
 
     // The flappyBunnySWing class extends JPanel, this is the game Panel where all the game action happen
     // in this class. It set up the timer to start to game and draw all those game models.
@@ -36,7 +37,11 @@ public class FlappyBunnySwing extends JPanel {
         setPreferredSize(new Dimension(1000,800));
         recordTime = 0.0;
 
+        soundEffect = new SoundEffect();
+
         addKeyListener(new GameEventListener(this));
+
+        soundEffect.playGameBGM();
 
         setFocusable(true);
         requestFocusInWindow();
@@ -65,6 +70,7 @@ public class FlappyBunnySwing extends JPanel {
                 if (gmc.isGameOver) {
                     timer.stop();
                     gotoSaveGame();
+                    soundEffect.stop();
                 }
 
 
@@ -224,6 +230,7 @@ public class FlappyBunnySwing extends JPanel {
         yesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                soundEffect.playButtonSound();
                 try {
                     controller.getPlayerManager().saveRecord(recordTime, controller.getAccountsFile());
                 } catch (FileNotFoundException ex) {
@@ -244,6 +251,7 @@ public class FlappyBunnySwing extends JPanel {
         noButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                soundEffect.playButtonSound();
                 try {
                     controller.getPlayerManager().saveRecord(
                             controller.getPlayerManager().getCurrentPlayer().getRecord(),
