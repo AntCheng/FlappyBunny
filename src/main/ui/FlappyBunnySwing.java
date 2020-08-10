@@ -121,7 +121,6 @@ public class FlappyBunnySwing extends JPanel {
 
     //MODIFIES: this
     //EFFECT: the overall draw method
-    //todo: test
     public void drawBunny(Bunny bunny, Double time, Graphics g) {
         g.drawImage(bunny.getImage(time), (int)bunny.getPositionX(), (int)bunny.getPositionY(), this);
     }

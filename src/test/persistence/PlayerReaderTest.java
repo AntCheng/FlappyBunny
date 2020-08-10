@@ -16,7 +16,7 @@ public class PlayerReaderTest {
     void testParseAccountsFile1() {
         try {
             PlayerReader playerReader = new PlayerReader();
-            List<Player> players = playerReader.readAccounts(new File("./data/testPlayers2"));
+            List<Player> players = playerReader.readAccounts(new File("./data/testPlayers3"));
             Player player1 = players.get(0);
             assertEquals("test1", player1.getUsername());
             assertEquals("pass1", player1.getPassword());

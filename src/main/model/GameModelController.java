@@ -113,7 +113,6 @@ public class GameModelController {
 
     //MODIFIES: this
     //EFFECT: update the current game difficulty
-    //todo: test
     public void updateGameDifficulty() {
         gameDifficulty = (int)(pastTime / 30) + 1;
     }
