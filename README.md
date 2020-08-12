@@ -31,4 +31,15 @@ A *bulleted* list:
 - *You can save the state of my application by clicking yes button when the game is end and asking if you want to save your game record.*
 - *You can reload the state of my application by clicking view button when you login/register successful. (viewing all accounts)*
 
+### Phase 4: Task 2
 
+- *Include a type hierarchy in my code. The GraphicModel class is the super class of Bunny, Cactus, FloatingEnemy and 
+Floor class. The three methods in GraphicModel are override in its child class in different ways.*
+
+### Phase 4: Task 3
+
+- *The First problem is the checkFloatingAlien method in GameModelController class, there is poor cohesion because it 
+perform two actions, so I divide it to two methods, checkFloatingAlien and checkAlienOut.*
+- *The Second problem is about the sound effect of the application, at first, the sound effect when a button is clicked 
+is identical code that would appear is many ui class, but these codes are identical and make poor cohesion 
+of these ui class, so I make another class which is SoundEffect that deals with sound effect*

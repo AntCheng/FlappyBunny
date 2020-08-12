@@ -3,6 +3,7 @@ package ui;
 import model.Player;
 import model.PlayerManager;
 
+import javax.sound.sampled.LineUnavailableException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -32,7 +33,11 @@ public class ActivityPanel extends JPanel {
         this.setLayout(activityLayout);
         this.setPreferredSize(new Dimension(400,400));
         constraints = new GridBagConstraints();
-        soundEffect = new SoundEffect();
+        try {
+            soundEffect = new SoundEffect();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
         setup();
         addPlayAction();
         addViewAction();

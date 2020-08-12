@@ -19,7 +19,9 @@ public class Cactus implements GraphicModel {
     private double positionY;
     private double velocityX;
     private double velocityY;
+
     private Floor floor;
+
     private boolean isTouched;
     private File cactusFile = new File("src/main/resources/cactus.png");
 

@@ -223,10 +223,23 @@ class GameModelControllerTest {
         assertEquals(1,bunny.countObservers());
         //assertEquals(); check notifyAllObservers
 
-        alienList.get(0).setPositionY(-200);
+
+    }
+
+    @Test
+    void checkAlienOutTest() throws IOException {
+        gmc.setFloatingAlienFrequenceTime(9.0);
         gmc.checkFloatingAlien();
+        alienList.get(0).setPositionY(-200);
+        gmc.checkAlienOut();
         assertEquals(0,alienList.size());
         assertEquals(0,bunny.countObservers());
+
+        gmc.setFloatingAlienFrequenceTime(9.0);
+        gmc.checkFloatingAlien();
+        gmc.checkAlienOut();
+        assertEquals(1,alienList.size());
+        assertEquals(1,bunny.countObservers());
     }
 
     @Test

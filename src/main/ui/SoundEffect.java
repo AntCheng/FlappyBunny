@@ -7,7 +7,12 @@ import java.io.IOException;
 public class SoundEffect {
 
     Clip clip;
+    Clip gameBGM;
+    Clip bunnyHurting = AudioSystem.getClip();
     AudioInputStream audioInputStream;
+
+    public SoundEffect() throws LineUnavailableException {
+    }
 
 
     public void playButtonSound() {
@@ -28,11 +33,11 @@ public class SoundEffect {
 
     public void playGameBGM() {
         try {
-            clip = AudioSystem.getClip();
+            gameBGM = AudioSystem.getClip();
             String bgm = "src/main/resources/Sound/Happy_Dreams.wav";
             audioInputStream = AudioSystem.getAudioInputStream(new File(bgm).getAbsoluteFile());
-            clip.open(audioInputStream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            gameBGM.open(audioInputStream);
+            gameBGM.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -40,10 +45,31 @@ public class SoundEffect {
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
-        clip.start();
+        gameBGM.start();
+    }
+
+    public void playBunnyHurt() {
+        if (!bunnyHurting.isRunning()) {
+            try {
+                bunnyHurting = AudioSystem.getClip();
+                audioInputStream = AudioSystem.getAudioInputStream(
+                        new File("src/main/resources/Sound/hurt_sound.wav").getAbsoluteFile());
+                bunnyHurting.open(audioInputStream);
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            }
+
+            bunnyHurting.start();
+        }
+
+
     }
 
     public void stop() {
-        clip.stop();
+        gameBGM.stop();
     }
 }
