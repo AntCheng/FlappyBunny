@@ -39,7 +39,7 @@ Floor class. The three methods in GraphicModel are override in its child class i
 ### Phase 4: Task 3
 
 - *The First problem is the checkFloatingAlien method in GameModelController class, there is poor cohesion because it 
-perform two actions, so I divide it to two methods, checkFloatingAlien and checkAlienOut.*
-- *The Second problem is about the sound effect of the application, at first, the sound effect when a button is clicked 
-is identical code that would appear is many ui class, but these codes are identical and make poor cohesion 
-of these ui class, so I make another class which is SoundEffect that deals with sound effect*
+perform two actions in a single method which violates the SRP, so I divide it to two methods, checkFloatingAlien and checkAlienOut.*
+- *The Second problem is about the sound effect of the application, at first, the sound effect would happen when a button is clicked,  
+but the codes that makes the sound effect are identical code that appear in many ui classes, these codes are identical and make poor cohesion 
+of these ui class, so I move them out and make another class which is SoundEffect class that specifically deals with sound effect*

@@ -4,6 +4,7 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
+// Class SoundEffect is for generating sounds in this application
 public class SoundEffect {
 
     Clip clip;
@@ -11,10 +12,12 @@ public class SoundEffect {
     Clip bunnyHurting = AudioSystem.getClip();
     AudioInputStream audioInputStream;
 
+    //EFFECT: constructor, could throw a LineUnavailable Exception
     public SoundEffect() throws LineUnavailableException {
     }
 
 
+    //EFFECTS: play the button sound effect when a button is clicked
     public void playButtonSound() {
         try {
             clip = AudioSystem.getClip();
@@ -31,6 +34,8 @@ public class SoundEffect {
         clip.start();
     }
 
+    //MODIFIES: this
+    //EFFECT: play the game BGM
     public void playGameBGM() {
         try {
             gameBGM = AudioSystem.getClip();
@@ -48,6 +53,8 @@ public class SoundEffect {
         gameBGM.start();
     }
 
+    //MODIFIES: this
+    //EFFECT: play the sound of a bunny hurting
     public void playBunnyHurt() {
         if (!bunnyHurting.isRunning()) {
             try {
@@ -69,6 +76,7 @@ public class SoundEffect {
 
     }
 
+    //Effect: stop playing the game Bgm
     public void stop() {
         gameBGM.stop();
     }
